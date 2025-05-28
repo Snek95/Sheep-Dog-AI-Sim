@@ -536,7 +536,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: 0.005, z: 0}
-  m_LocalScale: {x: 0.2, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7554207777601658940}
@@ -1034,6 +1034,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 415630935a69ecb4092a106e0a449e5c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5887198267750098894}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 415630935a69ecb4092a106e0a449e5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3729496280442172016}
   m_SourcePrefab: {fileID: 100100000, guid: 415630935a69ecb4092a106e0a449e5c, type: 3}
 --- !u!4 &3683611554401712408 stripped
 Transform:
@@ -1109,8 +1112,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.45488, y: 1.2941978, z: 3.5080183}
-  m_Center: {x: -0.052025914, y: 0.46400368, z: -0.08618891}
+  m_Size: {x: 0.930913, y: 1.2941978, z: 1.457128}
+  m_Center: {x: -0.033168316, y: 0.46400368, z: -0.11049917}
 --- !u!54 &5887198267750098894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1133,11 +1136,28 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &3729496280442172016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4059152415987016610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63272f867d944184b811af12deed67fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dog: {fileID: 4918057424967509732}
+  detectionRadius: 3
+  fenceAvoidanceRadius: 2
+  moveSpeed: 1.5
+  rotationSpeed: 180
 --- !u!1001 &4884939219615891727
 PrefabInstance:
   m_ObjectHideFlags: 0

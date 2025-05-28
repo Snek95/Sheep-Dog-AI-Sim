@@ -71,37 +71,41 @@ public class Dog : Agent
 
         float newDistanceSG = Vector3.Distance(sheep.transform.position, goal.transform.position);
         if (newDistanceSG < oldDistanceSG) AddReward(0.01f);
-        if (newDistanceSG > oldDistanceSG) AddReward(-0.001f);
+        if (newDistanceSG > oldDistanceSG) AddReward(-0.01f);
         oldDistanceSG = newDistanceSG;
         
         float newDistanceHS = Vector3.Distance(transform.position, sheep.transform.position);
-        if (newDistanceHS < oldDistanceHS) AddReward(0.001f);
-        if (newDistanceHS > oldDistanceHS) AddReward(-0.0001f);
+        if (newDistanceHS < oldDistanceHS) AddReward(0.00001f);
+        if (newDistanceHS > oldDistanceHS) AddReward(-0.00001f);
         oldDistanceHS = newDistanceHS;
     }
 
     private void SpawnObjects()
     {
+        // Hund resetten
         transform.localRotation = Quaternion.identity;
-        transform.localPosition = new Vector3 (0, 0.3f, 0);
+        transform.localPosition = new Vector3(0f, 0.3f, 0f);
 
-        sheep.localPosition = new Vector3(1,0.3f,1);
-        sheep.localRotation = Quaternion.identity;
-        sheep.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-        sheep.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        // Zufällige Position für das Goal am linken oder rechten Rand (X-Achse), aber variabel auf Z
+        float goalZ = Random.Range(-4f, 4f);
+        goal.localPosition = new Vector3(goal.localPosition.x, goal.localPosition.y, goalZ);
 
-
+        // Schaf zufällig positionieren (in der Mitte)
         float randomAngle = Random.Range(0f, 360f);
         Vector3 randomDirection = Quaternion.Euler(0f, randomAngle, 0f) * Vector3.forward;
-        rb.linearDamping = 15f;
-
         float randomDistance = Random.Range(1f, 2.5f);
-
         Vector3 sheepPosition = transform.localPosition + randomDirection * randomDistance;
-        sheep.localPosition = sheepPosition;
 
+        sheep.localPosition = new Vector3(sheepPosition.x, 0.3f, sheepPosition.z);
+        sheep.localRotation = Quaternion.identity;
 
+        var sheepRb = sheep.GetComponent<Rigidbody>();
+        sheepRb.linearVelocity = Vector3.zero;
+        sheepRb.angularVelocity = Vector3.zero;
+
+        rb.linearDamping = 15f;
     }
+
     private void MoveAgent(ActionSegment<int> act)
     {
         var action = act[0];
@@ -110,7 +114,7 @@ public class Dog : Agent
         switch (action)
         {
             case 0:
-                AddReward(-0.005f);
+                AddReward(-0.01f);
                 break;
 
             case 1: //Move forward
@@ -123,11 +127,11 @@ public class Dog : Agent
 
             case 2: //Rotate left
                 transform.Rotate(0f, -roationSpeed * Time.deltaTime, 0f);
-                AddReward(-0.005f);
+                AddReward(-0.01f);
                 break;
             case 3: //Rotate right
                 transform.Rotate(0f, roationSpeed * Time.deltaTime, 0f);
-                AddReward(-0.005f);
+                AddReward(-0.01f);
                 break;
 
         }
@@ -156,7 +160,7 @@ public class Dog : Agent
     
     public void GoalReached()
     {
-        AddReward(5.0f);
+        AddReward(50.0f);
         CumulativeReward= GetCumulativeReward();
         EndEpisode();
     }
