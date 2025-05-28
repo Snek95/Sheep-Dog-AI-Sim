@@ -39,15 +39,15 @@ public class Dog : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         //Position of Environment Objects
-        float goalPosX_normalized = goal.localPosition.x / 5f;
-        float goalPosZ_normalized = goal.localPosition.z / 5f;
+        float goalPosX_normalized = goal.localPosition.x;
+        float goalPosZ_normalized = goal.localPosition.z;
 
-        float sheepPosX_normalized = sheep.localPosition.x / 5f;
-        float sheepPosZ_normalized = sheep.localPosition.z / 5f;
+        float sheepPosX_normalized = sheep.localPosition.x;
+        float sheepPosZ_normalized = sheep.localPosition.z;
         float sheepRoation_normalized = (sheep.localRotation.eulerAngles.y / 360) * 2f - 1f;
 
-        float dogPosX_normalized = transform.localPosition.x / 5f;
-        float dogPosZ_normalized = transform.localPosition.z / 5f;
+        float dogPosX_normalized = transform.localPosition.x;
+        float dogPosZ_normalized = transform.localPosition.z ;
         float dogRoation_normalized = (transform.localRotation.eulerAngles.y/360) * 2f -1f;
 
         //Space Size in Behavior Script needs do match to the amount of Observations 
@@ -110,7 +110,7 @@ public class Dog : Agent
         switch (action)
         {
             case 0:
-                //AddReward(-0.005f);
+                AddReward(-0.005f);
                 break;
 
             case 1: //Move forward
@@ -123,11 +123,11 @@ public class Dog : Agent
 
             case 2: //Rotate left
                 transform.Rotate(0f, -roationSpeed * Time.deltaTime, 0f);
-                //AddReward(-0.005f);
+                AddReward(-0.005f);
                 break;
             case 3: //Rotate right
                 transform.Rotate(0f, roationSpeed * Time.deltaTime, 0f);
-                //AddReward(-0.005f);
+                AddReward(-0.005f);
                 break;
 
         }
@@ -164,7 +164,7 @@ public class Dog : Agent
     {
         if (collision.gameObject.CompareTag("Fance"))
         {
-            AddReward(-0.1f);
+            AddReward(-0.01f);
         }
         
     }
@@ -172,7 +172,7 @@ public class Dog : Agent
     {
         if (collision.gameObject.CompareTag("Fance"))
         {
-            AddReward(-0.1f);
+            AddReward(-0.01f);
         }
     }
     
