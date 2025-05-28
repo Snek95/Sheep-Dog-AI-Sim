@@ -1,0 +1,38 @@
+{
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 499968,
+                "file_path": "results\\dog4\\Dog\\Dog-499968.onnx",
+                "reward": -27.050308912992477,
+                "creation_time": 1748440134.0400112,
+                "auxillary_file_paths": [
+                    "results\\dog4\\Dog\\Dog-499968.pt"
+                ]
+            },
+            {
+                "steps": 500096,
+                "file_path": "results\\dog4\\Dog\\Dog-500096.onnx",
+                "reward": -27.050308912992477,
+                "creation_time": 1748440134.063578,
+                "auxillary_file_paths": [
+                    "results\\dog4\\Dog\\Dog-500096.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500096,
+            "file_path": "results\\dog4\\Dog.onnx",
+            "reward": -27.050308912992477,
+            "creation_time": 1748440134.063578,
+            "auxillary_file_paths": [
+                "results\\dog4\\Dog\\Dog-500096.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

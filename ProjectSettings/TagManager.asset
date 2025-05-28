@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Fance
+  - Goal
   - Anchor
+  - Sheep
   layers:
   - Default
   - TransparentFX
