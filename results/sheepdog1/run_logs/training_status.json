@@ -1,0 +1,47 @@
+{
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 499967,
+                "file_path": "results\\sheepdog1\\Dog\\Dog-499967.onnx",
+                "reward": -4.651599846207178,
+                "creation_time": 1748443333.639638,
+                "auxillary_file_paths": [
+                    "results\\sheepdog1\\Dog\\Dog-499967.pt"
+                ]
+            },
+            {
+                "steps": 500031,
+                "file_path": "results\\sheepdog1\\Dog\\Dog-500031.onnx",
+                "reward": -4.651599846207178,
+                "creation_time": 1748443333.6833937,
+                "auxillary_file_paths": [
+                    "results\\sheepdog1\\Dog\\Dog-500031.pt"
+                ]
+            },
+            {
+                "steps": 500031,
+                "file_path": "results\\sheepdog1\\Dog\\Dog-500031.onnx",
+                "reward": null,
+                "creation_time": 1748443457.170051,
+                "auxillary_file_paths": [
+                    "results\\sheepdog1\\Dog\\Dog-500031.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500031,
+            "file_path": "results\\sheepdog1\\Dog.onnx",
+            "reward": null,
+            "creation_time": 1748443457.170051,
+            "auxillary_file_paths": [
+                "results\\sheepdog1\\Dog\\Dog-500031.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
