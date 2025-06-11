@@ -3,13 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class SheepController : MonoBehaviour
 {
-    [SerializeField] private Transform dog;
+    
     [SerializeField] private float detectionRadius = 5f;
     [SerializeField] private float fenceAvoidanceRadius = 2f;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float rotationSpeed = 180f; // Grad pro Sekunde
 
     private Rigidbody rb;
+    public Transform dog;
 
     void Start()
     {

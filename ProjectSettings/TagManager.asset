@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Anchor
   - Sheep
+  - Dog
   layers:
   - Default
   - TransparentFX

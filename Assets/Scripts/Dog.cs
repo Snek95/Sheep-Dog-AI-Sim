@@ -8,9 +8,12 @@ using UnityEngine.InputSystem;
 public class Dog : Agent
 {   
     [SerializeField] private Transform goal;
-    [SerializeField] private Transform sheep;
     [SerializeField] private float moveSpeed= 1f;
     [SerializeField] private float roationSpeed =0.001f;
+    [SerializeField] private int sheepCount =4;
+    [SerializeField] private GameObject sheepPrefab;
+    public float minSheepDistance = 1f;
+    public float maxSheepDistance = 2.5f;
 
     [HideInInspector] public int CurrentEpisode = 0;
     [HideInInspector] public float CumulativeReward = 0f;
@@ -22,8 +25,8 @@ public class Dog : Agent
     {
         CurrentEpisode = 0;
         CumulativeReward = 0f;
-        oldDistanceSG = Vector3.Distance(sheep.transform.position, goal.transform.position);
-        oldDistanceHS = Vector3.Distance(transform.position, sheep.transform.position);
+        oldDistanceSG = Vector3.Distance(sheepPrefab.transform.position, goal.transform.position);
+        oldDistanceHS = Vector3.Distance(transform.position, sheepPrefab.transform.position);
         rb =GetComponent<Rigidbody>();
     }
     public override void OnEpisodeBegin()
@@ -36,6 +39,7 @@ public class Dog : Agent
 
     
 
+    /**
     public override void CollectObservations(VectorSensor sensor)
     {
         //Position of Environment Objects
@@ -60,6 +64,7 @@ public class Dog : Agent
         sensor.AddObservation(sheepPosZ_normalized);
         sensor.AddObservation(sheepRoation_normalized);
     }
+    **/
     public override void OnActionReceived(ActionBuffers actions) 
     {
         MoveAgent(actions.DiscreteActions);
@@ -69,12 +74,12 @@ public class Dog : Agent
         CumulativeReward = GetCumulativeReward();
 
 
-        float newDistanceSG = Vector3.Distance(sheep.transform.position, goal.transform.position);
+        float newDistanceSG = Vector3.Distance(sheepPrefab.transform.position, goal.transform.position);
         if (newDistanceSG < oldDistanceSG) AddReward(0.01f);
         if (newDistanceSG > oldDistanceSG) AddReward(-0.01f);
         oldDistanceSG = newDistanceSG;
         
-        float newDistanceHS = Vector3.Distance(transform.position, sheep.transform.position);
+        float newDistanceHS = Vector3.Distance(transform.position, sheepPrefab.transform.position);
         if (newDistanceHS < oldDistanceHS) AddReward(0.00001f);
         if (newDistanceHS > oldDistanceHS) AddReward(-0.00001f);
         oldDistanceHS = newDistanceHS;
@@ -86,24 +91,37 @@ public class Dog : Agent
         transform.localRotation = Quaternion.identity;
         transform.localPosition = new Vector3(0f, 0.3f, 0f);
 
-        // Zufällige Position für das Goal am linken oder rechten Rand (X-Achse), aber variabel auf Z
+        // Zufï¿½llige Position fï¿½r das Goal am linken oder rechten Rand (X-Achse), aber variabel auf Z
         float goalZ = Random.Range(-4f, 4f);
         goal.localPosition = new Vector3(goal.localPosition.x, goal.localPosition.y, goalZ);
 
-        // Schaf zufällig positionieren (in der Mitte)
-        float randomAngle = Random.Range(0f, 360f);
-        Vector3 randomDirection = Quaternion.Euler(0f, randomAngle, 0f) * Vector3.forward;
-        float randomDistance = Random.Range(1f, 2.5f);
-        Vector3 sheepPosition = transform.localPosition + randomDirection * randomDistance;
-
-        sheep.localPosition = new Vector3(sheepPosition.x, 0.3f, sheepPosition.z);
-        sheep.localRotation = Quaternion.identity;
-
-        var sheepRb = sheep.GetComponent<Rigidbody>();
-        sheepRb.linearVelocity = Vector3.zero;
-        sheepRb.angularVelocity = Vector3.zero;
+        //Schafe zufï¿½llig positionieren (in der Mitte)
+        SpawnSheepAround();
 
         rb.linearDamping = 15f;
+    }
+
+    private void SpawnSheepAround()
+    {
+        for (int i = 0; i < sheepCount; i++)
+        {
+            float randomAngle = Random.Range(0f, 360f);
+            Vector3 randomDirection = Quaternion.Euler(0f, randomAngle, 0f) * Vector3.forward;
+            float randomDistance = Random.Range(minSheepDistance, maxSheepDistance);
+            Vector3 spawnPosition = transform.position + randomDirection * randomDistance;
+            spawnPosition.y = 0.3f;
+
+            GameObject newSheep = Instantiate(sheepPrefab, spawnPosition, Quaternion.identity, transform);
+            newSheep.GetComponent<SheepController>().dog = transform;
+
+            Rigidbody rb = newSheep.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.linearDamping = 15f;
+            }
+        }
     }
 
     private void MoveAgent(ActionSegment<int> act)
