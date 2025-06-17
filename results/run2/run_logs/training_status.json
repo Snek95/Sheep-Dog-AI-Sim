@@ -1,0 +1,65 @@
+{
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 8499950,
+                "file_path": "results\\run2\\Dog\\Dog-8499950.onnx",
+                "reward": null,
+                "creation_time": 1749667314.1221554,
+                "auxillary_file_paths": [
+                    "results\\run2\\Dog\\Dog-8499950.pt"
+                ]
+            },
+            {
+                "steps": 8999966,
+                "file_path": "results\\run2\\Dog\\Dog-8999966.onnx",
+                "reward": null,
+                "creation_time": 1749667758.1335504,
+                "auxillary_file_paths": [
+                    "results\\run2\\Dog\\Dog-8999966.pt"
+                ]
+            },
+            {
+                "steps": 9499966,
+                "file_path": "results\\run2\\Dog\\Dog-9499966.onnx",
+                "reward": null,
+                "creation_time": 1749668193.7499354,
+                "auxillary_file_paths": [
+                    "results\\run2\\Dog\\Dog-9499966.pt"
+                ]
+            },
+            {
+                "steps": 9999982,
+                "file_path": "results\\run2\\Dog\\Dog-9999982.onnx",
+                "reward": null,
+                "creation_time": 1749668631.4467194,
+                "auxillary_file_paths": [
+                    "results\\run2\\Dog\\Dog-9999982.pt"
+                ]
+            },
+            {
+                "steps": 10000814,
+                "file_path": "results\\run2\\Dog\\Dog-10000814.onnx",
+                "reward": null,
+                "creation_time": 1749668631.4909153,
+                "auxillary_file_paths": [
+                    "results\\run2\\Dog\\Dog-10000814.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10000814,
+            "file_path": "results\\run2\\Dog.onnx",
+            "reward": null,
+            "creation_time": 1749668631.4909153,
+            "auxillary_file_paths": [
+                "results\\run2\\Dog\\Dog-10000814.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

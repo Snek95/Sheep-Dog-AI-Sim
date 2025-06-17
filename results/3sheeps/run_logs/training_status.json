@@ -1,0 +1,65 @@
+{
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 18499975,
+                "file_path": "results\\3sheeps\\Dog\\Dog-18499975.onnx",
+                "reward": 21.580402925610542,
+                "creation_time": 1750001223.0598989,
+                "auxillary_file_paths": [
+                    "results\\3sheeps\\Dog\\Dog-18499975.pt"
+                ]
+            },
+            {
+                "steps": 18999950,
+                "file_path": "results\\3sheeps\\Dog\\Dog-18999950.onnx",
+                "reward": null,
+                "creation_time": 1750001820.6946888,
+                "auxillary_file_paths": [
+                    "results\\3sheeps\\Dog\\Dog-18999950.pt"
+                ]
+            },
+            {
+                "steps": 19499964,
+                "file_path": "results\\3sheeps\\Dog\\Dog-19499964.onnx",
+                "reward": 24.25040240585804,
+                "creation_time": 1750002487.2304394,
+                "auxillary_file_paths": [
+                    "results\\3sheeps\\Dog\\Dog-19499964.pt"
+                ]
+            },
+            {
+                "steps": 19999970,
+                "file_path": "results\\3sheeps\\Dog\\Dog-19999970.onnx",
+                "reward": 33.5500031709671,
+                "creation_time": 1750003156.4065716,
+                "auxillary_file_paths": [
+                    "results\\3sheeps\\Dog\\Dog-19999970.pt"
+                ]
+            },
+            {
+                "steps": 20000034,
+                "file_path": "results\\3sheeps\\Dog\\Dog-20000034.onnx",
+                "reward": 33.5500031709671,
+                "creation_time": 1750003156.450322,
+                "auxillary_file_paths": [
+                    "results\\3sheeps\\Dog\\Dog-20000034.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 20000034,
+            "file_path": "results\\3sheeps\\Dog.onnx",
+            "reward": 33.5500031709671,
+            "creation_time": 1750003156.450322,
+            "auxillary_file_paths": [
+                "results\\3sheeps\\Dog\\Dog-20000034.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

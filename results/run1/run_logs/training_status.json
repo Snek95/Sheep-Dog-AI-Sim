@@ -18,15 +18,42 @@
                 "auxillary_file_paths": [
                     "results\\run1\\Dog\\Dog-182506.pt"
                 ]
+            },
+            {
+                "steps": 193386,
+                "file_path": "results\\run1\\Dog\\Dog-193386.onnx",
+                "reward": null,
+                "creation_time": 1749636374.2209632,
+                "auxillary_file_paths": [
+                    "results\\run1\\Dog\\Dog-193386.pt"
+                ]
+            },
+            {
+                "steps": 204266,
+                "file_path": "results\\run1\\Dog\\Dog-204266.onnx",
+                "reward": null,
+                "creation_time": 1749636694.4566202,
+                "auxillary_file_paths": [
+                    "results\\run1\\Dog\\Dog-204266.pt"
+                ]
+            },
+            {
+                "steps": 215146,
+                "file_path": "results\\run1\\Dog\\Dog-215146.onnx",
+                "reward": null,
+                "creation_time": 1749636730.8499513,
+                "auxillary_file_paths": [
+                    "results\\run1\\Dog\\Dog-215146.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 182506,
+            "steps": 215146,
             "file_path": "results\\run1\\Dog.onnx",
-            "reward": 48.05121623724699,
-            "creation_time": 1749544262.063178,
+            "reward": null,
+            "creation_time": 1749636730.8499513,
             "auxillary_file_paths": [
-                "results\\run1\\Dog\\Dog-182506.pt"
+                "results\\run1\\Dog\\Dog-215146.pt"
             ]
         }
     },

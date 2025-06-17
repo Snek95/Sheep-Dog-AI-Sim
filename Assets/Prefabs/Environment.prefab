@@ -1,5 +1,198 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1460465664072186299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3908468747537204295}
+  - component: {fileID: 9027611320955179651}
+  m_Layer: 0
+  m_Name: SheepController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3908468747537204295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460465664072186299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7554207777601658940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9027611320955179651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460465664072186299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc0410da2fa38347bc83dc5541c0986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sheepPrefab: {fileID: 3007265374734901012, guid: 82d00440e1651284683ffd1a8e0156dc, type: 3}
+  spawnCount: 20
+  spawnDistance: 20
+  area: {x: -30, y: 30, z: -30, w: 30}
+  speedMultiplier: 1
+  minSpeed: 0
+  maxSpeed: 6
+  rotationCoeff: 4
+  neighborDist: 10
+  boundaryAvoidanceStrength: 6
+  boundaryAvoidanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0038054
+      inSlope: -1.514516
+      outSlope: -1.514516
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.42470986
+      outWeight: 0.2548678
+    - serializedVersion: 3
+      time: 2
+      value: -0.0000006556511
+      inSlope: -0.00094382674
+      outSlope: -0.00094382674
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.5195087
+      outWeight: 0.3769911
+    - serializedVersion: 3
+      time: 2.5
+      value: -0.000004827976
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  attractionStrength: 5
+  attractionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.39923745
+      outSlope: -0.39923745
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.14640884
+    - serializedVersion: 3
+      time: 1
+      value: 0.2000122
+      inSlope: -0.4198611
+      outSlope: -0.4198611
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21823204
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  separationStrength: 5
+  separationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -3.3836253
+      outSlope: -3.3836253
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.03314917
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.12588541
+      outSlope: -0.12588541
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4392265
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  alignmentStrength: 0.83
+  alignmentCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.24087915
+      outSlope: -0.24087915
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.23236787
+    - serializedVersion: 3
+      time: 1
+      value: 0.5
+      inSlope: -0.56334424
+      outSlope: -0.56334424
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18508291
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  inertiaStrength: 0.2
+  randomMovementStrength: 1
+  randomMovementFrequency: 0.2
+  searchLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  dog: {fileID: 4918057424967509732}
+  dogFearCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 7
+      inSlope: -0.875
+      outSlope: -0.875
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 8
+      value: 0
+      inSlope: -0.875
+      outSlope: -0.875
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2639189758213355872
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +226,7 @@ Transform:
   - {fileID: 1926889608187773914}
   - {fileID: 134238905080619483}
   - {fileID: 7703019573112313378}
+  - {fileID: 3908468747537204295}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3064287616842588639
@@ -63,8 +257,8 @@ Transform:
   m_GameObject: {fileID: 3064287616842588639}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.1614, y: 0.25, z: -3.36874}
-  m_LocalScale: {x: 10, y: 0.5, z: 0.1}
+  m_LocalPosition: {x: 0.01700019, y: 0.15, z: -5.0299993}
+  m_LocalScale: {x: 10, y: 0.3, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7703019573112313378}
@@ -168,8 +362,8 @@ Transform:
   m_GameObject: {fileID: 3496452721909630781}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.1614, y: 0, z: -1.68126}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5723218801886357092}
@@ -207,7 +401,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7554207777601658940}
@@ -315,8 +509,8 @@ Transform:
   m_GameObject: {fileID: 5550122748632527675}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.88860035, y: 0.25, z: 1.68126}
-  m_LocalScale: {x: 10.199999, y: 0.5, z: 0.10000001}
+  m_LocalPosition: {x: 5.0670004, y: 0.15, z: 0.020000301}
+  m_LocalScale: {x: 10.199999, y: 0.3, z: 0.10000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7703019573112313378}
@@ -423,8 +617,8 @@ Transform:
   m_GameObject: {fileID: 6236955592614714642}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.1614, y: 0.25, z: 6.7312603}
-  m_LocalScale: {x: 10, y: 0.5, z: 0.1}
+  m_LocalPosition: {x: 0.017, y: 0.15, z: 5.07}
+  m_LocalScale: {x: 10, y: 0.3, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7703019573112313378}
@@ -532,8 +726,8 @@ Transform:
   m_GameObject: {fileID: 6724759836717826916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0.005, z: 0}
-  m_LocalScale: {x: 0.2, y: 1, z: 0.2}
+  m_LocalPosition: {x: -24, y: 0.005, z: -12}
+  m_LocalScale: {x: 1.2, y: 3, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1035899579213036151}
@@ -646,7 +840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1035899579213036151
 Transform:
   m_ObjectHideFlags: 0
@@ -656,8 +850,8 @@ Transform:
   m_GameObject: {fileID: 6903735974806274201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0069999695, y: 0.245, z: 5.2}
-  m_LocalScale: {x: 10, y: 0.5, z: 0.50000006}
+  m_LocalPosition: {x: 0.0069999695, y: 0.15, z: 5.2}
+  m_LocalScale: {x: 10, y: 0.3, z: 0.50000006}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 134238905080619483}
@@ -754,7 +948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &505504226458436432
 Transform:
   m_ObjectHideFlags: 0
@@ -764,8 +958,8 @@ Transform:
   m_GameObject: {fileID: 7532327651833811770}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0069999695, y: 0.245, z: -4.7063007}
-  m_LocalScale: {x: 10, y: 0.5, z: 0.50000006}
+  m_LocalPosition: {x: 0.0069999695, y: 0.15, z: -4.7063007}
+  m_LocalScale: {x: 10, y: 0.3, z: 0.50000006}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 134238905080619483}
@@ -872,8 +1066,8 @@ Transform:
   m_GameObject: {fileID: 8603415216002223169}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -9.2114, y: 0.25, z: 1.68126}
-  m_LocalScale: {x: 10.199999, y: 0.5, z: 0.10000001}
+  m_LocalPosition: {x: -5.033, y: 0.15, z: 0.020000301}
+  m_LocalScale: {x: 10.199999, y: 0.3, z: 0.10000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7703019573112313378}
@@ -962,19 +1156,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.7841916
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -982,7 +1176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4232819
+      value: -1.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1035,6 +1229,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2604177614177367169}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8024472707494252295}
   m_SourcePrefab: {fileID: 100100000, guid: 27a56a78149f0f244b17e414a77ecbe8, type: 3}
 --- !u!4 &4918057424967509732 stripped
 Transform:
@@ -1080,7 +1277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 0
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -1089,9 +1286,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 1
-  m_BehaviorType: 0
+  m_Model: {fileID: 5022602860645237092, guid: 357abff742146354ab3b2e5be7e45360, type: 3}
+  m_InferenceDevice: 3
+  m_BehaviorType: 2
   m_BehaviorName: Dog
   TeamId: 0
   m_UseChildSensors: 1
@@ -1112,12 +1309,13 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
+  MaxStep: 15000
   goal: {fileID: 134238905080619483}
-  moveSpeed: 1.5
+  moveSpeed: 5
   roationSpeed: 180
   sheepCount: 4
   sheepPrefab: {fileID: 3007265374734901012, guid: 82d00440e1651284683ffd1a8e0156dc, type: 3}
+  sheepController: {fileID: 9027611320955179651}
   minSheepDistance: 1
   maxSheepDistance: 2.5
   CurrentEpisode: 0
@@ -1163,3 +1361,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &8024472707494252295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5695825955341827166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - Goal
+  - Sheep
+  - Fance
+  m_RaysPerDirection: 5
+  m_MaxRayDegrees: 84.5
+  m_SphereCastRadius: 2.12
+  m_RayLength: 250
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 4.41
+  m_EndVerticalOffset: 4.69
