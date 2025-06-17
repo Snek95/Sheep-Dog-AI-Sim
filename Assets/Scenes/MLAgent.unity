@@ -1091,10 +1091,14 @@ PrefabInstance:
     - target: {fileID: 2641032725164224735, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 357abff742146354ab3b2e5be7e45360, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 192612ad473208645a01ffc702fdf89f, type: 3}
     - target: {fileID: 2641032725164224735, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
       propertyPath: m_BehaviorType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641032725164224735, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
+      propertyPath: m_InferenceDevice
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7554207777601658940, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
       propertyPath: m_LocalPosition.x
