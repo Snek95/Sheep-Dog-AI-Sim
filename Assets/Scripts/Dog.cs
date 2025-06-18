@@ -15,6 +15,7 @@ public class Dog : Agent
     [SerializeField] private SheepController sheepController;
     public float minSheepDistance = 1f;
     public float maxSheepDistance = 2.5f;
+    public float timeScale = 1f;
 
     [HideInInspector] public int CurrentEpisode = 0;
     [HideInInspector] public float CumulativeReward = 0f;
@@ -29,6 +30,8 @@ public class Dog : Agent
         CurrentEpisode = 0;
         CumulativeReward = 0f;
         rb =GetComponent<Rigidbody>();
+        Time.timeScale = timeScale;
+        
         
     }
     public override void OnEpisodeBegin()
@@ -38,7 +41,7 @@ public class Dog : Agent
 
         SpawnObjects();
     }
-
+    
     public override void OnActionReceived(ActionBuffers actions) 
     {
         MoveAgent(actions.DiscreteActions);

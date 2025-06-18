@@ -101,6 +101,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.14640884
     - serializedVersion: 3
+      time: 0.8029242
+      value: 0.7112263
+      inSlope: -0.65083
+      outSlope: -0.65083
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26829958
+      outWeight: 1
+    - serializedVersion: 3
       time: 1
       value: 0.2000122
       inSlope: -0.4198611
@@ -1286,9 +1295,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 192612ad473208645a01ffc702fdf89f, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: Dog
   TeamId: 0
   m_UseChildSensors: 1
@@ -1311,13 +1320,14 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 15000
   goal: {fileID: 134238905080619483}
-  moveSpeed: 5
+  moveSpeed: 2
   roationSpeed: 180
   sheepCount: 4
   sheepPrefab: {fileID: 3007265374734901012, guid: 82d00440e1651284683ffd1a8e0156dc, type: 3}
   sheepController: {fileID: 9027611320955179651}
   minSheepDistance: 1
   maxSheepDistance: 2.5
+  timeScale: 5
   CurrentEpisode: 0
   CumulativeReward: 0
 --- !u!114 &4021150015045991948
