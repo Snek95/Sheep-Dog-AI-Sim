@@ -1,0 +1,38 @@
+{
+    "Wolf": {
+        "checkpoints": [
+            {
+                "steps": 499989,
+                "file_path": "results\\wollf3\\Wolf\\Wolf-499989.onnx",
+                "reward": 5.723674322168033,
+                "creation_time": 1750337773.6754692,
+                "auxillary_file_paths": [
+                    "results\\wollf3\\Wolf\\Wolf-499989.pt"
+                ]
+            },
+            {
+                "steps": 500117,
+                "file_path": "results\\wollf3\\Wolf\\Wolf-500117.onnx",
+                "reward": 5.723674322168033,
+                "creation_time": 1750337773.7295318,
+                "auxillary_file_paths": [
+                    "results\\wollf3\\Wolf\\Wolf-500117.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500117,
+            "file_path": "results\\wollf3\\Wolf.onnx",
+            "reward": 5.723674322168033,
+            "creation_time": 1750337773.7295318,
+            "auxillary_file_paths": [
+                "results\\wollf3\\Wolf\\Wolf-500117.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

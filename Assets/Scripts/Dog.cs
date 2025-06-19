@@ -136,7 +136,9 @@ public class Dog : Agent
     }
     private void Update()
     {
-        
+        if (Keyboard.current.spaceKey.isPressed) {
+            EndEpisode();
+        }
     }
     
     public void GoalReached()

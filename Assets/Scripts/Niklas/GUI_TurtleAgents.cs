@@ -3,7 +3,7 @@ using UnityEngine;
 public class GUI_TurtleAgents : MonoBehaviour
 {
 
-    [SerializeField] private TurtleAgent turtleAgent;
+    [SerializeField] private WolfAgent wolfAgent;
 
     private GUIStyle defaultStyle = new GUIStyle();
     private GUIStyle positiveStyle = new GUIStyle();
@@ -11,10 +11,10 @@ public class GUI_TurtleAgents : MonoBehaviour
 
     private void OnGUI() {
 
-        string debugEpisode = "Episode: " + turtleAgent.currentEpisode + " - Step: " + turtleAgent.StepCount;
-        string debugReward = "Reward: " + turtleAgent.cumulativeReward.ToString();
+        string debugEpisode = "Episode: " + wolfAgent.currentEpisode + " - Step: " + wolfAgent.StepCount;
+        string debugReward = "Reward: " + wolfAgent.cumulativeReward.ToString();
 
-        GUIStyle rewardStyle = turtleAgent.cumulativeReward < 0 ? negativeStyle : positiveStyle;
+        GUIStyle rewardStyle = wolfAgent.cumulativeReward < 0 ? negativeStyle : positiveStyle;
 
         GUI.Label(new Rect(20, 20, 500, 30), debugEpisode, defaultStyle);
         GUI.Label(new Rect(20, 60, 500, 30), debugReward, rewardStyle);
