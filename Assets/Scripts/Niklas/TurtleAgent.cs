@@ -22,7 +22,7 @@ public class TurtleAgent : Agent
     private Color defaultGroundColor;
     private Coroutine flashGroundCoroutine;
 
-    public override void Heuristic(in ActionBuffers actionsOut) {
+    public override void Heuristic(in ActionBuffers actionsOut) { //Manuelle Übernahme des Agenten
 
         var discreteActionsOut = actionsOut.DiscreteActions;
         discreteActionsOut[0] = 0; //Do nothing

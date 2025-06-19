@@ -9,6 +9,7 @@ TagManager:
   - Anchor
   - Sheep
   - Wall
+  - Dog
   layers:
   - Default
   - TransparentFX
