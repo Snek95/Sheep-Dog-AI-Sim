@@ -1,0 +1,65 @@
+{
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 8499942,
+                "file_path": "results\\smallrun\\Dog\\Dog-8499942.onnx",
+                "reward": 19.405002027750015,
+                "creation_time": 1749987141.9079561,
+                "auxillary_file_paths": [
+                    "results\\smallrun\\Dog\\Dog-8499942.pt"
+                ]
+            },
+            {
+                "steps": 8999964,
+                "file_path": "results\\smallrun\\Dog\\Dog-8999964.onnx",
+                "reward": -11.149198830127716,
+                "creation_time": 1749987661.1579654,
+                "auxillary_file_paths": [
+                    "results\\smallrun\\Dog\\Dog-8999964.pt"
+                ]
+            },
+            {
+                "steps": 9499994,
+                "file_path": "results\\smallrun\\Dog\\Dog-9499994.onnx",
+                "reward": 17.202936242024105,
+                "creation_time": 1749988181.2021544,
+                "auxillary_file_paths": [
+                    "results\\smallrun\\Dog\\Dog-9499994.pt"
+                ]
+            },
+            {
+                "steps": 9999997,
+                "file_path": "results\\smallrun\\Dog\\Dog-9999997.onnx",
+                "reward": 39.80080206195513,
+                "creation_time": 1749988706.8508117,
+                "auxillary_file_paths": [
+                    "results\\smallrun\\Dog\\Dog-9999997.pt"
+                ]
+            },
+            {
+                "steps": 10000125,
+                "file_path": "results\\smallrun\\Dog\\Dog-10000125.onnx",
+                "reward": 39.80080206195513,
+                "creation_time": 1749988706.895382,
+                "auxillary_file_paths": [
+                    "results\\smallrun\\Dog\\Dog-10000125.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10000125,
+            "file_path": "results\\smallrun\\Dog.onnx",
+            "reward": 39.80080206195513,
+            "creation_time": 1749988706.895382,
+            "auxillary_file_paths": [
+                "results\\smallrun\\Dog\\Dog-10000125.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

@@ -8,7 +8,9 @@ public class GoalTrigger : MonoBehaviour
     {
         if (other.CompareTag("Sheep") && dog != null)
         {
+            other.GetComponent<SheepBehaviour>().RemoveSheep();
             dog.GoalReached();
+            
         }
     }
 }
