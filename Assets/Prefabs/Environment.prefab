@@ -87,6 +87,40 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  barrierAvoidanceStrength: 20
+  barrierAvoidanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0038054
+      inSlope: -0.9308782
+      outSlope: -0.9308782
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.42470986
+      outWeight: 0.121267684
+    - serializedVersion: 3
+      time: 2.58891
+      value: -0.0000006556511
+      inSlope: -0.00094382674
+      outSlope: -0.00094382674
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.5195087
+      outWeight: 0.3769911
+    - serializedVersion: 3
+      time: 3.8523118
+      value: -0.000004827976
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   attractionStrength: 5
   attractionCurve:
     serializedVersion: 2
@@ -176,7 +210,7 @@ MonoBehaviour:
   randomMovementFrequency: 0.2
   searchLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   dog: {fileID: 4918057424967509732}
   dogFearCurve:
     serializedVersion: 2

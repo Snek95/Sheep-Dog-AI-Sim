@@ -41,6 +41,13 @@ public class SheepController : MonoBehaviour
     [Tooltip("Kurve für die Randvermeidung (Dadurch schon leichte Vermeidung bevor das Schaf gegen den Zaun läuft.).")]
     public AnimationCurve boundaryAvoidanceCurve;
 
+    [Tooltip("Stärke, mit der Schafe Hindernisse meiden.")]
+    [Range(0.0f, 50.0f)]
+    public float barrierAvoidanceStrength = 20.0f;
+
+    [Tooltip("Kurve für die Hindernissvermeidung (Dadurch schon leichte Vermeidung bevor das Schaf gegen ein Hindernis läuft.).")]
+    public AnimationCurve barrierAvoidanceCurve;
+
     [Tooltip("Stärke, mit der Schafe zur Herde gezogen werden (Kohäsion).")]
     [Range(0.0f, 10.0f)]
     public float attractionStrength = 1.0f;

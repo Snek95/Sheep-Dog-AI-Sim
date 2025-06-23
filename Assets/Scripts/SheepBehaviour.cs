@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SheepBehaviour : MonoBehaviour
@@ -5,6 +6,8 @@ public class SheepBehaviour : MonoBehaviour
     public SheepController controller;
 
     public Vector3 currentVelocity = Vector3.zero;
+
+    public List<GameObject> activeBarriers = new List<GameObject>();
 
     float randomMovementOffset;
 
@@ -28,6 +31,7 @@ public class SheepBehaviour : MonoBehaviour
 
         Vector3 dog = Vector3.zero;
         Vector3 boundary = Vector3.zero;
+        Vector3 barriers = Vector3.zero;
 
         //---Sheep interactions---
         var neighbors = Physics.OverlapSphere(transform.position, controller.neighborDist, controller.searchLayer);
@@ -73,6 +77,18 @@ public class SheepBehaviour : MonoBehaviour
         float zMaxAvoid = controller.boundaryAvoidanceCurve.Evaluate(controller.transform.position.z + controller.area.w - currentPosition.z) * controller.boundaryAvoidanceStrength;
         boundary = new Vector3(-xMaxAvoid + xMinAvoid, 0, -zMaxAvoid + zMinAvoid);
 
+        // BarrierAvoidance
+        foreach (var barrier in activeBarriers)
+        {
+            Vector3 closestPoint = barrier.GetComponentInParent<Collider>().ClosestPointOnBounds(currentPosition);
+            Debug.DrawLine(currentPosition, closestPoint, Color.red);
+            float distance = Vector3.Distance(currentPosition, closestPoint);
+            float strength = controller.barrierAvoidanceCurve.Evaluate(distance) * controller.barrierAvoidanceStrength;
+            Vector3 direction = (currentPosition - closestPoint).normalized;
+            barriers += direction * strength;
+            Debug.Log($"Barrier: {barrier.name}, Distance: {distance}, Strength: {strength}");
+        }
+
         // Random movement
         float xNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 10.0f)-0.46f;
         float zNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 20.0f)-0.46f;
@@ -87,9 +103,10 @@ public class SheepBehaviour : MonoBehaviour
         Debug.DrawLine(currentPosition, currentPosition + dog, Color.magenta);
         Debug.DrawLine(currentPosition, currentPosition + boundary, Color.cyan);
         Debug.DrawLine(currentPosition, currentPosition + randomMovement, Color.white);
+        Debug.DrawLine(currentPosition, currentPosition + barriers, Color.black);
 
         // Calculate the new direction
-        Vector3 newVelocity = (inertia + separation + alignment + attraction + dog + boundary + randomMovement) * controller.speedMultiplier;
+        Vector3 newVelocity = (inertia + separation + alignment + attraction + dog + boundary + randomMovement + barriers) * controller.speedMultiplier;
         newVelocity = new Vector3 (newVelocity.x,0, newVelocity.z);
         newVelocity = ClampMagnitude(newVelocity, controller.maxSpeed, controller.minSpeed);
         currentVelocity = newVelocity;
