@@ -3,6 +3,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 
 public class Dog : Agent
@@ -16,6 +17,8 @@ public class Dog : Agent
     public float minSheepDistance = 1f;
     public float maxSheepDistance = 2.5f;
     public float timeScale = 1f;
+    public List<GameObject> obstacles;
+    public int obstacleAmount;
 
     [HideInInspector] public int CurrentEpisode = 0;
     [HideInInspector] public float CumulativeReward = 0f;
@@ -70,21 +73,58 @@ public class Dog : Agent
 
     private void SpawnObjects()
     {
-        // Hund resetten
+        // Hund zurücksetzen
         transform.localRotation = Quaternion.identity;
         transform.localPosition = new Vector3(0f, 0.3f, 0f);
 
-        // Zuf�llige Position f�r das Goal am linken oder rechten Rand (X-Achse), aber variabel auf Z
-        float goalZ = Random.Range(-24f, 24f);
-        goal.localPosition = new Vector3(goal.localPosition.x, goal.localPosition.y, goalZ);
-
-        //Spawn Sheeps
+        // Zufällige Position für das Goal
+        float goalZ = Random.Range(-12f, 12f); // angepasst an 24x24
+        float goalX = Random.value < 0.5f ? -24f : 24f; // zufällig links oder rechts
+        goal.localPosition = new Vector3(goalX, goal.localPosition.y, goalZ);
+        
+        SpawnObstacles();
+        // Schafe spawnen
         sheepController.DestroyAllChildren();
         sheepController.Spawn();
-        firstSheep = sheepController.transform.GetChild(0).transform;
-        oldDistanceSG = Vector3.Distance(firstSheep.position, goal.transform.position);
-        oldDistanceHS = Vector3.Distance(transform.position, firstSheep.position);
+        if (sheepController.transform.childCount > 0)
+        {
+            firstSheep = sheepController.transform.GetChild(0).transform;
+            oldDistanceSG = Vector3.Distance(firstSheep.position, goal.transform.position);
+            oldDistanceHS = Vector3.Distance(transform.position, firstSheep.position);
+        }
+        else
+        {
+            Debug.LogWarning("No sheep spawned!");
+        }
+
         rb.linearDamping = 15f;
+
+        // Hindernisse spawnen
+        
+    }
+
+    private void SpawnObstacles()
+    {
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Obstacle"))
+        {
+            Destroy(obj);
+            
+        }
+
+        // Neue Hindernisse spawnen
+        for (int i = 0; i < obstacleAmount; i++)
+        {
+            if (obstacles.Count == 0) return;
+
+            GameObject prefab = obstacles[Random.Range(0, obstacles.Count)];
+            float x = Random.Range(-12f, 12f);
+            float z = Random.Range(-12f, 12f);
+            Vector3 position = new Vector3(x, 0f, z);
+            Quaternion rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            GameObject instance = Instantiate(prefab, position, rotation);
+            instance.tag = "Obstacle";
+          
+        }
     }
 
     private void MoveAgent(ActionSegment<int> act)
@@ -168,7 +208,7 @@ public class Dog : Agent
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Fance"))
+        if (collision.gameObject.CompareTag("Fance")||collision.gameObject.CompareTag("Obstacle"))
         {
             AddReward(-0.01f);
         }
@@ -176,7 +216,7 @@ public class Dog : Agent
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Fance"))
+        if (collision.gameObject.CompareTag("Fance") || collision.gameObject.CompareTag("Obstacle"))
         {
             AddReward(-0.01f);
         }

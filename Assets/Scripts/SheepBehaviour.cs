@@ -80,6 +80,7 @@ public class SheepBehaviour : MonoBehaviour
         // BarrierAvoidance
         foreach (var barrier in activeBarriers)
         {
+            if (barrier == null) continue;
             Vector3 closestPoint = barrier.GetComponentInParent<Collider>().ClosestPointOnBounds(currentPosition);
             Debug.DrawLine(currentPosition, closestPoint, Color.red);
             float distance = Vector3.Distance(currentPosition, closestPoint);

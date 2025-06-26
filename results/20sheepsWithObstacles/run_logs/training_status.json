@@ -1,0 +1,38 @@
+{
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 499984,
+                "file_path": "results\\20sheepsWithObstacles\\Dog\\Dog-499984.onnx",
+                "reward": null,
+                "creation_time": 1750934286.2413692,
+                "auxillary_file_paths": [
+                    "results\\20sheepsWithObstacles\\Dog\\Dog-499984.pt"
+                ]
+            },
+            {
+                "steps": 976664,
+                "file_path": "results\\20sheepsWithObstacles\\Dog\\Dog-976664.onnx",
+                "reward": null,
+                "creation_time": 1750939181.3323746,
+                "auxillary_file_paths": [
+                    "results\\20sheepsWithObstacles\\Dog\\Dog-976664.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 976664,
+            "file_path": "results\\20sheepsWithObstacles\\Dog.onnx",
+            "reward": null,
+            "creation_time": 1750939181.3323746,
+            "auxillary_file_paths": [
+                "results\\20sheepsWithObstacles\\Dog\\Dog-976664.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

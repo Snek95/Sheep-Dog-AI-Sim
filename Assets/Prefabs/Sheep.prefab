@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   currentVelocity: {x: 0, y: 0, z: 0}
+  activeBarriers: []
 --- !u!135 &3504299705942682667
 SphereCollider:
   m_ObjectHideFlags: 0

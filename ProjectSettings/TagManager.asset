@@ -10,6 +10,7 @@ TagManager:
   - Sheep
   - Wall
   - Dog
+  - Obstacle
   layers:
   - Default
   - TransparentFX
