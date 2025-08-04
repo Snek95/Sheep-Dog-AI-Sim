@@ -1089,6 +1089,10 @@ PrefabInstance:
       value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 2641032725164224735, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 357abff742146354ab3b2e5be7e45360, type: 3}
+    - target: {fileID: 2641032725164224735, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
       propertyPath: m_BehaviorType
       value: 0
       objectReference: {fileID: 0}
@@ -1139,6 +1143,26 @@ PrefabInstance:
     - target: {fileID: 8024472707494252295, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
       propertyPath: 'm_DetectableTags.Array.data[3]'
       value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027611320955179651, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
+      propertyPath: speedMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027611320955179651, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
+      propertyPath: alignmentStrength
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027611320955179651, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
+      propertyPath: attractionStrength
+      value: 2.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027611320955179651, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
+      propertyPath: searchLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027611320955179651, guid: f5f416f40ce6f15458ad6f0f32f4afed, type: 3}
+      propertyPath: separationStrength
+      value: 2.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
