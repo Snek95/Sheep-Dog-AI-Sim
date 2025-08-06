@@ -5,10 +5,14 @@ using Unity.MLAgents.Sensors;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.Rendering;
+using UnityEditor.Animations;
+using UnityEngine.UIElements;
+using System;
+using System.Collections.Generic;
 
 public class WolfAgent : Agent
 {
-    [SerializeField] private Transform sheep;
+    [SerializeField] private SheepController sheepController;
     [SerializeField] private Transform dog;
 
     [SerializeField] private float moveSpeed = 2.5f;
@@ -27,7 +31,11 @@ public class WolfAgent : Agent
     private Coroutine flashGroundCoroutine;
     private Rigidbody rb;
 
-    private float previousDistanceToSheep;
+    private float closestSheepDistance = Mathf.Infinity;
+    private Transform closestSheep;
+
+
+    private List<Transform> sheepList;
 
     public override void Heuristic(in ActionBuffers actionsOut) { //Manuelle Übernahme des Agenten
 
@@ -56,6 +64,8 @@ public class WolfAgent : Agent
     public override void Initialize() { //Diese Methode wird ausgeführt wenn der Agent erzeugt wird, quasi das Äquivalent zu Awake()
         Debug.Log("Initialize()");
 
+        SpawnObjects();
+        
         renderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody>();
         defaultWolfColor = renderer.material.color;
@@ -65,11 +75,13 @@ public class WolfAgent : Agent
 
         if (groundRenderer != null) {
             defaultGroundColor = groundRenderer.material.color;
-        }
-
-        previousDistanceToSheep = Vector3.Distance(transform.localPosition, sheep.localPosition);
+        }       
+        
 
     }
+
+
+
 
     public override void OnEpisodeBegin() {//Diese Methode wird ausgeführt beim Start jeder Episode. In jeder Episode versucht der Agent das Goal zu erreichen, quasi Start()
         Debug.Log("OnEpisodeBegin()");
@@ -105,26 +117,38 @@ public class WolfAgent : Agent
 
     private void SpawnObjects() {
 
+        closestSheepDistance = Mathf.Infinity;
+
+        if (sheepController.transform.childCount > 0) {
+            sheepController.DestroyAllChildren();
+        }
+
+        sheepController.Spawn();
+
+        foreach (Transform sheep in sheepList) {
+
+            float sheepDistance = Vector3.Distance(transform.localPosition, sheep.localPosition);
+
+            if (sheepDistance < closestSheepDistance) {
+                closestSheepDistance = sheepDistance;
+                closestSheep = sheep;
+            }
+        }
+
+
         transform.localPosition = new Vector3(0, 0.61f, 0);
         transform.localRotation = Quaternion.identity;
-
-        float randomAngle = Random.Range(0f, 360f);
-        Vector3 randomDirection = Quaternion.Euler(0f, randomAngle, 0f) * Vector3.forward;
-
-        float randomDistance = Random.Range(2.5f, 8f);
-
-        Vector3 sheepPosition = transform.localPosition + randomDirection * randomDistance;
-
-        sheep.localPosition = new Vector3(sheepPosition.x, 0.3f, sheepPosition.z);
+                      
+       
     }
 
-    public override void CollectObservations(VectorSensor sensor) {
+    /*public override void CollectObservations(VectorSensor sensor) {
 
         // Richtung und Entfernung zum Schaf
-        Vector3 toSheep = sheep.localPosition - transform.localPosition;
+        Vector3 toSheep = sheepController.localPosition - transform.localPosition;
         Vector3 localToSheep = transform.InverseTransformDirection(toSheep);
         float distanceToSheep = toSheep.magnitude / 10f; // ggf. Arena-Radius normalisieren
-        float sheepRotation_normalized = (sheep.localRotation.eulerAngles.y / 360f) * 2f - 1f;
+        float sheepRotation_normalized = (sheepController.localRotation.eulerAngles.y / 360f) * 2f - 1f;
 
         sensor.AddObservation(localToSheep.x); // Links/Rechts
         sensor.AddObservation(localToSheep.z); // Vorwärts/Rückwärts
@@ -145,7 +169,7 @@ public class WolfAgent : Agent
         float wolfRotation_normalized = (transform.localRotation.eulerAngles.y / 360f) * 2f - 1f;
         sensor.AddObservation(wolfRotation_normalized);
 
-    }
+    }*/
 
     public override void OnActionReceived(ActionBuffers actions) {
 
@@ -157,18 +181,18 @@ public class WolfAgent : Agent
 
         AddReward(-1f / MaxStep);
 
-        float currentDistanceToSheep = Vector3.Distance(transform.localPosition, sheep.localPosition);
-        float distanceDelta = previousDistanceToSheep - currentDistanceToSheep;
+        float currentDistanceToSheep = Vector3.Distance(transform.localPosition, closestSheep.localPosition);
+        float distanceDelta = closestSheepDistance - currentDistanceToSheep;
 
         AddReward(distanceDelta * 0.5f);
 
-        previousDistanceToSheep = currentDistanceToSheep;
+        closestSheepDistance = currentDistanceToSheep;
 
-        float distance = Vector3.Distance(transform.localPosition, sheep.localPosition);
+        float distance = Vector3.Distance(transform.localPosition, closestSheep.localPosition);
         if (distance < 1.0f)
-            AddReward(0.05f); // Bonus bei Nähe
+            AddReward(0.02f); // Bonus bei Nähe
 
-        Vector3 toSheep = (sheep.localPosition - transform.localPosition).normalized;
+        Vector3 toSheep = (closestSheep.localPosition - transform.localPosition).normalized;
         float lookDot = Vector3.Dot(transform.forward, toSheep); // 1 = direkt schauen, 0 = orthogonal
         AddReward(lookDot * 0.005f); // kleiner Bonus, wenn er „hinblickt“
 

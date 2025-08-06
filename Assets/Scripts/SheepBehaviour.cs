@@ -116,7 +116,7 @@ public class SheepBehaviour : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(newVelocity);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, controller.rotationCoeff * Time.deltaTime);
 
-        // Move the sheep
+        // Move the sheepController
         transform.position += transform.forward * newVelocity.magnitude * Time.deltaTime;
     }
 
