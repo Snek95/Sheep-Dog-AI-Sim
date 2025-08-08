@@ -75,7 +75,7 @@ public class Dog : Agent
     {
         // Hund zurücksetzen
         transform.localRotation = Quaternion.identity;
-        transform.localPosition = new Vector3(0f, 0.3f, 0f);
+        transform.localPosition = new Vector3(0f, 3f, 0f);
 
         // Zufällige Position für das Goal
         float goalZ = Random.Range(-12f, 12f); // angepasst an 24x24
@@ -208,7 +208,7 @@ public class Dog : Agent
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Fance")||collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Wall")||collision.gameObject.CompareTag("Obstacle"))
         {
             AddReward(-0.01f);
         }
@@ -216,7 +216,7 @@ public class Dog : Agent
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Fance") || collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle"))
         {
             AddReward(-0.01f);
         }
