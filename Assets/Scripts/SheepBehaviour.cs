@@ -87,7 +87,7 @@ public class SheepBehaviour : MonoBehaviour
             float strength = controller.barrierAvoidanceCurve.Evaluate(distance) * controller.barrierAvoidanceStrength;
             Vector3 direction = (currentPosition - closestPoint).normalized;
             barriers += direction * strength;
-            Debug.Log($"Barrier: {barrier.name}, Distance: {distance}, Strength: {strength}");
+            //Debug.Log($"Barrier: {barrier.name}, Distance: {distance}, Strength: {strength}");
         }
 
         // Random movement

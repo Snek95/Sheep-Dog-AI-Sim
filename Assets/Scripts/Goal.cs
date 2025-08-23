@@ -3,6 +3,7 @@ using UnityEngine;
 public class GoalTrigger : MonoBehaviour
 {
     public Dog dog;
+    
 
     private void OnTriggerEnter(Collider other)
     {

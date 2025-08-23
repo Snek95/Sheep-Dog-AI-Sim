@@ -1,0 +1,68 @@
+{
+    "goal_open_sides": {
+        "lesson_num": 0
+    },
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 5999994,
+                "file_path": "results\\dog3\\Dog\\Dog-5999994.onnx",
+                "reward": 416.5115564256906,
+                "creation_time": 1755890732.2104394,
+                "auxillary_file_paths": [
+                    "results\\dog3\\Dog\\Dog-5999994.pt"
+                ]
+            },
+            {
+                "steps": 6499975,
+                "file_path": "results\\dog3\\Dog\\Dog-6499975.onnx",
+                "reward": 610.1171271204948,
+                "creation_time": 1755892127.4716992,
+                "auxillary_file_paths": [
+                    "results\\dog3\\Dog\\Dog-6499975.pt"
+                ]
+            },
+            {
+                "steps": 6999969,
+                "file_path": "results\\dog3\\Dog\\Dog-6999969.onnx",
+                "reward": null,
+                "creation_time": 1755893517.0470057,
+                "auxillary_file_paths": [
+                    "results\\dog3\\Dog\\Dog-6999969.pt"
+                ]
+            },
+            {
+                "steps": 7499983,
+                "file_path": "results\\dog3\\Dog\\Dog-7499983.onnx",
+                "reward": 441.42838699929416,
+                "creation_time": 1755894921.4360209,
+                "auxillary_file_paths": [
+                    "results\\dog3\\Dog\\Dog-7499983.pt"
+                ]
+            },
+            {
+                "steps": 7614747,
+                "file_path": "results\\dog3\\Dog\\Dog-7614747.onnx",
+                "reward": null,
+                "creation_time": 1755895293.0351841,
+                "auxillary_file_paths": [
+                    "results\\dog3\\Dog\\Dog-7614747.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 7614747,
+            "file_path": "results\\dog3\\Dog.onnx",
+            "reward": null,
+            "creation_time": 1755895293.0351841,
+            "auxillary_file_paths": [
+                "results\\dog3\\Dog\\Dog-7614747.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

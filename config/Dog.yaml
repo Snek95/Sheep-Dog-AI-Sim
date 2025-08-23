@@ -64,14 +64,48 @@ engine_settings:
   capture_frame_rate: 60
   no_graphics: false
   no_graphics_monitor: false
-environment_parameters: null
+environment_parameters:
+  goal_open_sides:
+    curriculum:
+      - name: easy
+        value: 4.0
+        completion_criteria:
+          measure: reward
+          behavior: Dog
+          signal_smoothing: true
+          min_lesson_length: 300000
+          threshold: 0.1
+      - name: medium
+        value: 3.0
+        completion_criteria:
+          measure: reward
+          behavior: Dog
+          signal_smoothing: true
+          min_lesson_length: 300000
+          threshold: 50
+      - name: hard
+        value: 2.0
+        completion_criteria:
+          measure: reward
+          behavior: Dog
+          signal_smoothing: true
+          min_lesson_length: 300000
+          threshold: 70
+      - name: very_hard
+        value: 1.0
+        completion_criteria:
+          measure: reward
+          behavior: Dog
+          signal_smoothing: true
+          min_lesson_length: 300000
+          threshold: 80
 checkpoint_settings:
-  run_id: sheepdog1
+  run_id: dog
   initialize_from: null
   load_model: false
-  resume: true
+  resume: false
   force: false
-  train_model: false
+  train_model: true
   inference: false
   results_dir: results
 torch_settings:

@@ -1,0 +1,68 @@
+{
+    "goal_open_sides": {
+        "lesson_num": 0
+    },
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 499962,
+                "file_path": "results\\dog\\Dog\\Dog-499962.onnx",
+                "reward": 173.57564140913578,
+                "creation_time": 1755780199.0516784,
+                "auxillary_file_paths": [
+                    "results\\dog\\Dog\\Dog-499962.pt"
+                ]
+            },
+            {
+                "steps": 999943,
+                "file_path": "results\\dog\\Dog\\Dog-999943.onnx",
+                "reward": 462.58525788784027,
+                "creation_time": 1755781596.114809,
+                "auxillary_file_paths": [
+                    "results\\dog\\Dog\\Dog-999943.pt"
+                ]
+            },
+            {
+                "steps": 1499971,
+                "file_path": "results\\dog\\Dog\\Dog-1499971.onnx",
+                "reward": 369.72651111582917,
+                "creation_time": 1755782849.0885518,
+                "auxillary_file_paths": [
+                    "results\\dog\\Dog\\Dog-1499971.pt"
+                ]
+            },
+            {
+                "steps": 1999961,
+                "file_path": "results\\dog\\Dog\\Dog-1999961.onnx",
+                "reward": 471.81146126559804,
+                "creation_time": 1755784154.3769248,
+                "auxillary_file_paths": [
+                    "results\\dog\\Dog\\Dog-1999961.pt"
+                ]
+            },
+            {
+                "steps": 2166737,
+                "file_path": "results\\dog\\Dog\\Dog-2166737.onnx",
+                "reward": null,
+                "creation_time": 1755784660.189823,
+                "auxillary_file_paths": [
+                    "results\\dog\\Dog\\Dog-2166737.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2166737,
+            "file_path": "results\\dog\\Dog.onnx",
+            "reward": null,
+            "creation_time": 1755784660.189823,
+            "auxillary_file_paths": [
+                "results\\dog\\Dog\\Dog-2166737.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

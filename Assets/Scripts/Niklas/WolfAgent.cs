@@ -58,6 +58,7 @@ public class WolfAgent : Agent
     private void Update() {
         if (Keyboard.current.spaceKey.isPressed) {
             EndEpisode();
+            Debug.Log("Reward:" + "   " + cumulativeReward);
         }
     }
 

@@ -4,222 +4,240 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.Linq;
 
-
-public class Dog : Agent
-{   
+public class Dog : Agent {
     [SerializeField] private Transform goal;
-    [SerializeField] private float moveSpeed= 1f;
-    [SerializeField] private float roationSpeed =0.001f;
-    [SerializeField] private int sheepCount =4;
-    [SerializeField] private GameObject sheepPrefab;
+    [SerializeField] private float moveSpeed = 2.5f;
+    [SerializeField] private float roationSpeed = 0.001f;
+
     [SerializeField] private SheepController sheepController;
-    public float minSheepDistance = 1f;
-    public float maxSheepDistance = 2.5f;
+    [SerializeField] private Transform spawnReference;
+    [SerializeField] private List<GameObject> obstacles;
+    [SerializeField] private int obstacleAmount;
+
+    public float optimalMinDist = 2f;
+    public float optimalMaxDist = 5f;
     public float timeScale = 1f;
-    public List<GameObject> obstacles;
-    public int obstacleAmount;
+
+    private Vector3 ogStablePos = new Vector3(-11.79f, 2.93f, -2.42f);
 
     [HideInInspector] public int CurrentEpisode = 0;
     [HideInInspector] public float CumulativeReward = 0f;
-    private float oldDistanceSG;
-    private float oldDistanceHS;
+
     private Rigidbody rb;
+    private int sheepsInGoal = 0;
 
-    Transform firstSheep;
+    private List<Transform> activeSheep = new List<Transform>();
+    private Dictionary<Transform, float> sheepPrevDist = new Dictionary<Transform, float>();
 
-    public override void Initialize()
-    {
-        CurrentEpisode = 0;
-        CumulativeReward = 0f;
-        rb =GetComponent<Rigidbody>();
+    public override void Initialize() {
+        rb = GetComponent<Rigidbody>();
         Time.timeScale = timeScale;
-        
-        
     }
-    public override void OnEpisodeBegin()
-    {
+
+    public override void OnEpisodeBegin() {
+
+        GameManger.Instance.AddEpisode();
+        //GameManger.Instance.IncreaseDifficulty();
         CurrentEpisode++;
         CumulativeReward = 0f;
+        sheepsInGoal = 0;
+        sheepPrevDist.Clear();
+        activeSheep.Clear();
 
         SpawnObjects();
+        GoalManager.Instance.UpdateGoalSides();
+
+        foreach (Transform sheep in sheepController.transform) {
+            if (sheep != null && sheep.gameObject.activeSelf)
+                activeSheep.Add(sheep);
+        }
     }
-    
-    public override void OnActionReceived(ActionBuffers actions) 
-    {
+
+    public override void OnActionReceived(ActionBuffers actions) {
         MoveAgent(actions.DiscreteActions);
 
-        AddReward(-2f / MaxStep);
+        // kleine Strafe pro Schritt, animiert Bewegung
+        AddReward(-0.05f / MaxStep);
+
+        float stepReward = 0f;
+        Vector3 dogPos = transform.position;
+
+        foreach (Transform sheepChild in activeSheep.ToList()) {
+            if (sheepChild == null || !sheepChild.gameObject.activeSelf) {
+                activeSheep.Remove(sheepChild);
+                continue;
+            }
+
+            Vector3 sheepPos = sheepChild.position;
+
+            // 1. Abstandskontrolle (stärkere Bestrafung)
+            float dist = Vector3.Distance(dogPos, sheepPos);
+            if (dist >= optimalMinDist && dist <= optimalMaxDist)
+                stepReward += 0.004f;
+            else
+                stepReward -= 0.005f;
+
+            // 2. Einflussvektor
+            Vector3 toGoal = (goal.position - sheepPos).normalized;
+            Vector3 toDog = (dogPos - sheepPos).normalized;
+            float alignment = Vector3.Dot(toGoal, toDog);
+            stepReward += alignment * 0.0002f;
+
+            // 3. Fortschritt Richtung Ziel
+            float newDist = Vector3.Distance(sheepPos, goal.position);
+            if (sheepPrevDist.TryGetValue(sheepChild, out float prevDist)) {
+                if (newDist < prevDist) stepReward += 0.006f;
+                else stepReward -= 0.002f;
+            }
+            sheepPrevDist[sheepChild] = newDist;
+        }
+
+        // Herdenkohäsion (weniger Strafe, mehr Belohnung)
+        HerdCohesionReward(activeSheep);
+
+        // Gruppenerfolg
+        stepReward += sheepsInGoal * 0.01f;
+
+        AddReward(stepReward);
+
+        // Endbedingung
+        if (NoMoreSheepsLeft()) {
+            AddReward(150.0f); // deutlich höhere Belohnung
+            EndEpisode();
+        }
 
         CumulativeReward = GetCumulativeReward();
-
-        /**
-        if (firstSheep != null)
-        {
-            float newDistanceSG = Vector3.Distance(firstSheep.position, goal.transform.position);
-            if (newDistanceSG < oldDistanceSG) AddReward(0.01f);
-            if (newDistanceSG > oldDistanceSG) AddReward(-0.01f);
-            oldDistanceSG = newDistanceSG;
-
-            float newDistanceHS = Vector3.Distance(transform.position, firstSheep.position);
-            if (newDistanceHS < oldDistanceHS) AddReward(0.00001f);
-            if (newDistanceHS > oldDistanceHS) AddReward(-0.00001f);
-            oldDistanceHS = newDistanceHS;
-        }
-        **/
-        
-        
     }
 
-    private void SpawnObjects()
-    {
-        // Hund zurücksetzen
+    private Vector3 CalcHerdCenter(List<Transform> sheep) {
+        Vector3 center = Vector3.zero;
+        int count = 0;
+        foreach (var s in sheep) {
+            if (s != null && s.gameObject.activeSelf) {
+                center += s.position;
+                count++;
+            }
+        }
+        return count > 0 ? center / count : center;
+    }
+
+    private void HerdCohesionReward(List<Transform> sheep) {
+        Vector3 center = CalcHerdCenter(sheep);
+        float cohesionReward = 0f;
+
+        foreach (var s in sheep) {
+            if (s == null || !s.gameObject.activeSelf) continue;
+
+            float distanceToCenter = Vector3.Distance(center, s.position);
+            if (distanceToCenter < 4f) cohesionReward += 0.004f; // Belohnung leicht erhöht
+            else if (distanceToCenter > 6f) cohesionReward -= 0.0005f; // Strafe reduziert
+        }
+
+        AddReward(cohesionReward);
+    }
+
+    private void SpawnObjects() {
         transform.localRotation = Quaternion.identity;
         transform.localPosition = new Vector3(0f, 3f, 0f);
 
-        // Zufällige Position für das Goal
-        float goalZ = Random.Range(-12f, 12f); // angepasst an 24x24
-        float goalX = Random.value < 0.5f ? -24f : 24f; // zufällig links oder rechts
-        goal.localPosition = new Vector3(goalX, goal.localPosition.y, goalZ);
-        
-        SpawnObstacles();
-        // Schafe spawnen
+        if (GoalManager.Instance.getRandomGoalLocation()) {
+            SpawnRandomGoal();
+        } else {
+            goal.transform.localPosition = ogStablePos;
+        }
+
+        if (GoalManager.Instance.getSpawnObstacles()) {
+            SpawnObstacles();
+        }
+
         sheepController.DestroyAllChildren();
         sheepController.Spawn();
-        if (sheepController.transform.childCount > 0)
-        {
-            firstSheep = sheepController.transform.GetChild(0).transform;
-            oldDistanceSG = Vector3.Distance(firstSheep.position, goal.transform.position);
-            oldDistanceHS = Vector3.Distance(transform.position, firstSheep.position);
-        }
-        else
-        {
-            Debug.LogWarning("No sheep spawned!");
-        }
 
         rb.linearDamping = 15f;
-
-        // Hindernisse spawnen
-        
     }
 
-    private void SpawnObstacles()
-    {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Obstacle"))
-        {
-            Destroy(obj);
-            
+    private void SpawnRandomGoal() {
+        float goalX = Random.Range(-12f, 12f);
+        float goalZ = Random.Range(-12f, 12f);
+
+        Vector3 randomGoalPos = new Vector3(spawnReference.position.x + goalX, 0.63f, spawnReference.position.z + goalZ);
+
+        goal.transform.position = randomGoalPos;
+    }
+
+    private void SpawnObstacles() {
+        foreach (Transform child in spawnReference.transform) {
+            if (child.CompareTag("Obstacle")) Destroy(child.gameObject);
         }
 
-        // Neue Hindernisse spawnen
-        for (int i = 0; i < obstacleAmount; i++)
-        {
+        for (int i = 0; i < obstacleAmount; i++) {
             if (obstacles.Count == 0) return;
 
             GameObject prefab = obstacles[Random.Range(0, obstacles.Count)];
             float x = Random.Range(-12f, 12f);
             float z = Random.Range(-12f, 12f);
-            Vector3 position = new Vector3(x, 0f, z);
-            Quaternion rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-            GameObject instance = Instantiate(prefab, position, rotation);
+            Vector3 pos = new Vector3(spawnReference.position.x + x, 0f, spawnReference.position.z + z);
+            Quaternion rot = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            GameObject instance = Instantiate(prefab, pos, rot, spawnReference);
             instance.tag = "Obstacle";
-          
         }
     }
 
-    private void MoveAgent(ActionSegment<int> act)
-    {
+    private void MoveAgent(ActionSegment<int> act) {
         var action = act[0];
         float maxSpeed = 2.5f;
-        //set Branch size in behavior parameter to case n
-        switch (action)
-        {
+
+        switch (action) {
             case 0:
                 AddReward(-0.01f);
                 break;
-
-            case 1: //Move forward
+            case 1:
                 rb.AddForce(transform.forward * moveSpeed, ForceMode.VelocityChange);
                 if (rb.linearVelocity.magnitude > maxSpeed)
-                {
                     rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-                }
                 break;
-
-            case 2: //Rotate left
+            case 2:
                 transform.Rotate(0f, -roationSpeed * Time.deltaTime, 0f);
                 AddReward(-0.01f);
                 break;
-            case 3: //Rotate right
+            case 3:
                 transform.Rotate(0f, roationSpeed * Time.deltaTime, 0f);
                 AddReward(-0.01f);
                 break;
-
         }
     }
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
+
+    public override void Heuristic(in ActionBuffers actionsOut) {
         var discreteActionsOut = actionsOut.DiscreteActions;
 
-        if (Keyboard.current.dKey.isPressed)
-        {
-            discreteActionsOut[0] = 3;
-        }
-        else if (Keyboard.current.wKey.isPressed)
-        {
-            discreteActionsOut[0] = 1;
-        }
-        else if (Keyboard.current.aKey.isPressed)
-        {
-            discreteActionsOut[0] = 2;
-        }
+        if (Keyboard.current.dKey.isPressed) discreteActionsOut[0] = 3;
+        else if (Keyboard.current.wKey.isPressed) discreteActionsOut[0] = 1;
+        else if (Keyboard.current.aKey.isPressed) discreteActionsOut[0] = 2;
     }
-    private void Update()
-    {
-        if (Keyboard.current.spaceKey.isPressed) {
-            EndEpisode();
-        }
-    }
-    
-    public void GoalReached()
-    {
-        AddReward(3.0f);
-        CumulativeReward= GetCumulativeReward();
-        if(NoMoreSheepsLeft()) EndEpisode();
 
-    }
-    private bool NoMoreSheepsLeft()
-    {
-        int activeChildCount = 0;
+    public void GoalReached() {
+        AddReward(50.0f); // deutlich erhöht
+        sheepsInGoal++;
+        CumulativeReward = GetCumulativeReward();
 
-        foreach (Transform child in sheepController.transform)
-        {
-            if (child.gameObject.activeSelf)
-            {
-                activeChildCount++;
-            }
-        }
+        activeSheep = activeSheep.Where(s => s != null && s.gameObject.activeSelf).ToList();
 
-        if (activeChildCount > 0)
-        {
-            return false;
-        }
-        return true;
+        if (NoMoreSheepsLeft()) EndEpisode();
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall")||collision.gameObject.CompareTag("Obstacle"))
-        {
-            AddReward(-0.01f);
-        }
-        
+
+    private bool NoMoreSheepsLeft() {
+        return activeSheep.Count == 0;
     }
-    private void OnCollisionStay(Collision collision)
-    {
+
+    private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle"))
-        {
-            AddReward(-0.01f);
-        }
+            AddReward(-1f);
     }
-    
+
+    private void OnCollisionStay(Collision collision) {
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle"))
+            AddReward(-0.01f);
+    }
 }
