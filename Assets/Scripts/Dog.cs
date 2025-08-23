@@ -11,7 +11,9 @@ public class Dog : Agent {
     [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float roationSpeed = 0.001f;
 
+    public bool useRLSheep = true;
     [SerializeField] private SheepController sheepController;
+    [SerializeField] private RLSheepController rlSheepController;
     [SerializeField] private Transform spawnReference;
     [SerializeField] private List<GameObject> obstacles;
     [SerializeField] private int obstacleAmount;
@@ -48,11 +50,6 @@ public class Dog : Agent {
 
         SpawnObjects();
         GoalManager.Instance.UpdateGoalSides();
-
-        foreach (Transform sheep in sheepController.transform) {
-            if (sheep != null && sheep.gameObject.activeSelf)
-                activeSheep.Add(sheep);
-        }
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
@@ -152,8 +149,26 @@ public class Dog : Agent {
             SpawnObstacles();
         }
 
-        sheepController.DestroyAllChildren();
-        sheepController.Spawn();
+        if (useRLSheep)
+        {
+            if (rlSheepController == null) return;
+            rlSheepController.ResetScene();
+            foreach (RLSheepBehaviour sheepBehaviour in rlSheepController.sheepList)
+            {
+                if (sheepBehaviour != null && sheepBehaviour.gameObject.activeSelf)
+                    activeSheep.Add(sheepBehaviour.transform);
+            }
+        }
+        else
+        {
+            if (sheepController == null) return;
+            sheepController.DestroyAllChildren();
+            sheepController.Spawn();
+            foreach (Transform sheep in sheepController.transform) {
+                if (sheep != null && sheep.gameObject.activeSelf)
+                    activeSheep.Add(sheep);
+            }
+        }
 
         rb.linearDamping = 15f;
     }
