@@ -2920,7 +2920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7799f1d4fade1094aa6bb075645ba982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openSidesOverride: 3
+  difficulty: 1
   logInterval: 5
 --- !u!4 &2068550472
 Transform:
@@ -3212,6 +3212,22 @@ PrefabInstance:
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
+      propertyPath: area.w
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
+      propertyPath: area.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
+      propertyPath: area.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
+      propertyPath: area.z
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
