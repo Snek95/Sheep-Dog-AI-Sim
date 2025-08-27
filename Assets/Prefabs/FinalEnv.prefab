@@ -571,15 +571,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba35c9d56fde25148835b5dd0b0759b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnvironmentSteps: 10000
+  MaxEnvironmentSteps: 5000
   sheepAmount: 10
   spawnDistance: 12
-  maxSheepMoveSpeed: 5
-  sheepRotationSpeed: 5
+  maxSheepMoveSpeed: 0.75
+  sheepRotationSpeed: 4
   RLSheepPrefab: {fileID: 3007265374734901012, guid: caade1b6b65e8c449a9babcc71e392c6, type: 3}
   sheepUI: {fileID: 0}
   dog: {fileID: 1666196131271086309}
-  dogFearRadius: 10
+  dogFearRadius: 8
+  neighborDist: 6
   meanDistanceRewardMultiplier: 0.5
   sheepDistanceToAverageMultiplier: 0.2
   sheepDistanceToAverageRewardCurve:
@@ -2902,10 +2903,10 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 10000
+  MaxStep: 5000
   goal: {fileID: 4260821102090246684}
   moveSpeed: 2
-  roationSpeed: 180
+  roationSpeed: 270
   useRLSheep: 1
   sheepController: {fileID: 4348287283092642634}
   rlSheepController: {fileID: 1125312689822709192}
@@ -2917,7 +2918,7 @@ MonoBehaviour:
   obstacleAmount: 15
   optimalMinDist: 2
   optimalMaxDist: 5
-  timeScale: 2
+  timeScale: 5
   CurrentEpisode: 0
   CumulativeReward: 0
 --- !u!114 &1789760299411173773
@@ -2944,7 +2945,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: d470e080cc60c7044b91fb69656b3e07, type: 3}
   m_InferenceDevice: 1
-  m_BehaviorType: 2
+  m_BehaviorType: 1
   m_BehaviorName: Dog
   TeamId: 0
   m_UseChildSensors: 1

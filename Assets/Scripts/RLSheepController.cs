@@ -19,6 +19,7 @@ public class RLSheepController : MonoBehaviour
     public SheepUI sheepUI;
     public GameObject dog;
     public float dogFearRadius = 5f;
+    public float neighborDist = 7f;
 
     public float meanDistanceRewardMultiplier = 0.1f;
     public float sheepDistanceToAverageMultiplier = 0.1f;
@@ -51,6 +52,7 @@ public class RLSheepController : MonoBehaviour
         {
             ResetScene();
         }
+        /*
         // Calculate average position of all active sheep
         int activeSheepCount = 0;
         avgPosition = Vector3.zero;
@@ -82,14 +84,14 @@ public class RLSheepController : MonoBehaviour
         }
         float meanDistance = pairCount > 0 ? totalDistance / pairCount : 0f;
         //m_SheepGroup.AddGroupReward(-meanDistance * meanDistanceRewardMultiplier * 0.01f);
-        m_SheepGroup.AddGroupReward(sheepDistanceToAverageRewardCurve.Evaluate(meanDistance) * sheepDistanceToAverageMultiplier);
+        m_SheepGroup.AddGroupReward(sheepDistanceToAverageRewardCurve.Evaluate(meanDistance) * sheepDistanceToAverageMultiplier);*/
     }
 
 
     public void SheepReachedGoal(RLSheepBehaviour sheep)
     {
         // Handle the logic when a sheep reaches its goal
-        Debug.Log("Sheep reached goal: " + sheep.name);
+        //Debug.Log("Sheep reached goal: " + sheep.name);
         m_SheepGroup.UnregisterAgent(sheep);
         sheep.gameObject.SetActive(false);
     }

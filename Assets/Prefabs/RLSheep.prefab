@@ -252,6 +252,9 @@ MonoBehaviour:
   agentRb: {fileID: 0}
   CurrentEpisode: 0
   CumulativeReward: 0
+  sheepLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &2318309637386559391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,9 +277,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 0e8c79f7e0dfa9b459cdac2a4e2b9a23, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 75da925204f392d4abec7772572319c9, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: RLSheep
   TeamId: 0
   m_UseChildSensors: 1
@@ -299,7 +302,7 @@ MonoBehaviour:
   - Dog
   - Sheep
   - Obstacle
-  - Fance
+  - Wall
   m_RaysPerDirection: 7
   m_MaxRayDegrees: 170
   m_SphereCastRadius: 1.13

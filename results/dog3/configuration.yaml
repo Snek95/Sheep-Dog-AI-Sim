@@ -70,7 +70,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3340
+          seed: 7610
           value: 4.0
       name: easy
       completion_criteria:
@@ -83,7 +83,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3341
+          seed: 7611
           value: 3.0
       name: medium
       completion_criteria:
@@ -96,7 +96,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3342
+          seed: 7612
           value: 2.0
       name: hard
       completion_criteria:
@@ -109,7 +109,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3343
+          seed: 7613
           value: 1.0
       name: very_hard
       completion_criteria:
@@ -123,7 +123,7 @@ checkpoint_settings:
   run_id: dog3
   initialize_from: null
   load_model: false
-  resume: false
+  resume: true
   force: false
   train_model: true
   inference: false

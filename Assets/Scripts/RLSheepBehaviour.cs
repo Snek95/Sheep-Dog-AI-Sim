@@ -1,4 +1,5 @@
 using System;
+using Unity.Barracuda;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using UnityEngine;
@@ -11,8 +12,12 @@ public class RLSheepBehaviour : Agent
     [HideInInspector]
     public Rigidbody agentRb;
 
-    [HideInInspector] public int CurrentEpisode = 0;
-    [HideInInspector] public float CumulativeReward = 0f;
+
+        [HideInInspector] public int CurrentEpisode = 0;
+        [HideInInspector] public float CumulativeReward = 0f;
+        private Vector3 previousVelocity = Vector3.zero;
+
+    [SerializeField] private LayerMask sheepLayerMask;
 
     public override void Initialize()
     {
@@ -25,23 +30,28 @@ public class RLSheepBehaviour : Agent
     public void MoveAgent(ActionBuffers act)
     {
         
+
         var rotate = act.ContinuousActions[1];
         var rawMoveSpeed = act.ContinuousActions[0];
         float moveSpeed = rawMoveSpeed + 0.5f;
         transform.Rotate(Vector3.up, controller.sheepRotationSpeed * rotate);
-        AddReward(-0.01f * Math.Abs(rotate)); 
-        
+        AddReward(-0.01f * Math.Abs(rotate));
+
         agentRb.AddForce(transform.forward * controller.maxSheepMoveSpeed * moveSpeed, ForceMode.VelocityChange);
-        if(moveSpeed > 0 && moveSpeed < 0.75)
+        if (moveSpeed > 0.2f && moveSpeed < 0.75f)
         {
-            //AddReward(0.03f);
+            AddReward(0.01f);
         }
         else
         {
             AddReward(-0.01f);
         }
-                
 
+        // Penalty for abrupt changes in velocity
+        Vector3 currentVelocity = agentRb.linearVelocity;
+        float velocityChange = Math.Abs(currentVelocity.magnitude - previousVelocity.magnitude);
+        AddReward(-0.05f * velocityChange); // Adjust multiplier as needed
+        previousVelocity = currentVelocity;
     }
 
 
@@ -68,59 +78,61 @@ public class RLSheepBehaviour : Agent
                 AddReward(-0.5f - 0.5f * (controller.dogFearRadius - distanceToDog) / controller.dogFearRadius);
             }
         }
-
+        Collider[] neighbors = Physics.OverlapSphere(transform.position, controller.neighborDist, sheepLayerMask);
+        AddReward(0.1f * (neighbors.Length - 1));
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Fance") || collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle"))
         {
             AddReward(-0.5f);
         } else if (collision.gameObject.CompareTag("Sheep"))
         {
-            AddReward(-0.1f);
+            AddReward(-0.2f);
         }
         
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Fance") || collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle"))
         {
             AddReward(-0.5f);
         } else if (collision.gameObject.CompareTag("Sheep"))
         {
-            AddReward(-0.1f);
+            AddReward(-0.2f);
         }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var discreteActionsOut = actionsOut.DiscreteActions;
         var continuousActionsOut = actionsOut.ContinuousActions;
-        continuousActionsOut[0] = 1f;
+        // Move speed: W/S keys
         if (Keyboard.current.wKey.isPressed)
         {
-            discreteActionsOut[0] = 1; // Move forward
+            continuousActionsOut[0] = 1f; // Forward
         }
         else if (Keyboard.current.sKey.isPressed)
         {
-            discreteActionsOut[0] = 2; // Move backward
+            continuousActionsOut[0] = -1f; // Backward
         }
         else
         {
-            discreteActionsOut[0] = 0; // No movement
+            continuousActionsOut[0] = -0.5f; // No movement
         }
+
+        // Rotation: A/D keys
         if (Keyboard.current.aKey.isPressed)
         {
-            discreteActionsOut[1] = 1; // Rotate left
+            continuousActionsOut[1] = -1f; // Rotate left
         }
         else if (Keyboard.current.dKey.isPressed)
         {
-            discreteActionsOut[1] = 2; // Rotate right
+            continuousActionsOut[1] = 1f; // Rotate right
         }
         else
         {
-            discreteActionsOut[1] = 0; // No rotation
+            continuousActionsOut[1] = 0f; // No rotation
         }
     }
 }
