@@ -1606,6 +1606,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4980094405418828748, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
+      propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (1)
@@ -3713,13 +3717,9 @@ PrefabInstance:
       propertyPath: area.z
       value: -15
       objectReference: {fileID: 0}
-    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: spawnCount
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4980094405418828748, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: useRLSheep
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name

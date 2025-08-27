@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sheepPrefab: {fileID: 4975794192835700409, guid: 0f1fdd6d6e40f424cbab7ea8ea02f7fb, type: 3}
-  spawnCount: 30
+  spawnCount: 10
   spawnDistance: 15.15
   area: {x: -15, y: 15, z: -15, w: 15}
   speedMultiplier: 1
   minSpeed: 0
-  maxSpeed: 6
+  maxSpeed: 2
   rotationCoeff: 4
   neighborDist: 10
   boundaryAvoidanceStrength: 6
@@ -574,7 +574,7 @@ MonoBehaviour:
   MaxEnvironmentSteps: 5000
   sheepAmount: 10
   spawnDistance: 12
-  maxSheepMoveSpeed: 0.75
+  maxSheepMoveSpeed: 0.4
   sheepRotationSpeed: 4
   RLSheepPrefab: {fileID: 3007265374734901012, guid: caade1b6b65e8c449a9babcc71e392c6, type: 3}
   sheepUI: {fileID: 0}
@@ -2905,9 +2905,9 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
   goal: {fileID: 4260821102090246684}
-  moveSpeed: 2
+  moveSpeed: 2.5
   roationSpeed: 270
-  useRLSheep: 1
+  useRLSheep: 0
   sheepController: {fileID: 4348287283092642634}
   rlSheepController: {fileID: 1125312689822709192}
   spawnReference: {fileID: 1802065917219853050}
