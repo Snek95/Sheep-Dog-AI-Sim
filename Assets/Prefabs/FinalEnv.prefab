@@ -2906,8 +2906,8 @@ MonoBehaviour:
   MaxStep: 5000
   goal: {fileID: 4260821102090246684}
   moveSpeed: 2.5
-  roationSpeed: 270
-  useRLSheep: 0
+  roationSpeed: 245
+  useRLSheep: 1
   sheepController: {fileID: 4348287283092642634}
   rlSheepController: {fileID: 1125312689822709192}
   spawnReference: {fileID: 1802065917219853050}
@@ -2915,10 +2915,10 @@ MonoBehaviour:
   - {fileID: 5409866378618964058, guid: 44618a9ad45b1a546981d474c4651a3d, type: 3}
   - {fileID: 1318277886820073866, guid: bcfee2347cfa4d94bb00801951b073e7, type: 3}
   - {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
-  obstacleAmount: 15
+  obstacleAmount: 0
   optimalMinDist: 2
   optimalMaxDist: 5
-  timeScale: 5
+  timeScale: 1
   CurrentEpisode: 0
   CumulativeReward: 0
 --- !u!114 &1789760299411173773
@@ -2943,9 +2943,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: d470e080cc60c7044b91fb69656b3e07, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: fd52b077d615e1945a2e7c6a85d0ab6a, type: 3}
   m_InferenceDevice: 1
-  m_BehaviorType: 1
+  m_BehaviorType: 2
   m_BehaviorName: Dog
   TeamId: 0
   m_UseChildSensors: 1
@@ -3009,6 +3009,7 @@ MonoBehaviour:
   - Wall
   - Sheep
   - Obstacle
+  - Goal
   m_RaysPerDirection: 3
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5

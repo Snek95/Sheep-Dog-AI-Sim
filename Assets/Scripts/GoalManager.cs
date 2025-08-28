@@ -25,8 +25,8 @@ public class GoalManager : MonoBehaviour {
 
     public void UpdateGoalSides() {
 
-        float openSidesValue = Academy.Instance.EnvironmentParameters.GetWithDefault("goal_open_sides", 4);
-        int openSides = Mathf.RoundToInt(openSidesValue);
+        //float openSidesValue = Academy.Instance.EnvironmentParameters.GetWithDefault("goal_open_sides", 4);
+        //int openSides = Mathf.RoundToInt(openSidesValue);
 
         foreach (GameObject go in stableSides) {
             go.SetActive(true);
@@ -45,7 +45,7 @@ public class GoalManager : MonoBehaviour {
 
             case 2: //Vierseitiges Ziel, keine Obstacles, Random Goal
                 stableSides[0].SetActive(true);
-                stableSides[1].SetActive(false);
+                stableSides[1].SetActive(true);
                 stableSides[2].SetActive(true);
                 stableSides[3].SetActive(true);
                 spawnObstacles = false;
@@ -55,7 +55,7 @@ public class GoalManager : MonoBehaviour {
 
             case 3: //Vierseitiges Ziel, keine Obstacles, kein random Goal
                 stableSides[0].SetActive(true);
-                stableSides[1].SetActive(false);
+                stableSides[1].SetActive(true);
                 stableSides[2].SetActive(true);
                 stableSides[3].SetActive(true);
                 spawnObstacles = false;

@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hay (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e0c7b55dad545b940b8d3f5ed5726917, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -496,10 +500,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalEnv (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -556,6 +556,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4991cbb2e7c3df44e81eaaa846d62fe3, type: 3}
       propertyPath: m_Name
       value: Waterplace (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4991cbb2e7c3df44e81eaaa846d62fe3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -634,6 +638,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hay (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e0c7b55dad545b940b8d3f5ed5726917, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -703,6 +711,10 @@ PrefabInstance:
     - target: {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
       propertyPath: m_Name
       value: Obstacle HayStack (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -911,6 +923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle HayStack (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -967,10 +983,6 @@ PrefabInstance:
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1031,10 +1043,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2232400440330722107, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 34.4
@@ -1079,10 +1087,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalEnv (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1122,10 +1126,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2232400440330722107, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 34.2
@@ -1169,10 +1169,6 @@ PrefabInstance:
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1389,10 +1385,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2232400440330722107, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 145.2
@@ -1436,10 +1428,6 @@ PrefabInstance:
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (10)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1550,6 +1538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Well (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7aa44c1dfa72cb54394f2245d328ead3, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1606,17 +1598,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4980094405418828748, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: moveSpeed
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1713,6 +1697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hay (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e0c7b55dad545b940b8d3f5ed5726917, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1772,6 +1760,10 @@ PrefabInstance:
     - target: {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
       propertyPath: m_Name
       value: Obstacle HayStack
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1892,10 +1884,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalEnv (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1953,6 +1941,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waterplace
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4991cbb2e7c3df44e81eaaa846d62fe3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1969,10 +1961,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2232400440330722107, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 144.6
@@ -2016,10 +2004,6 @@ PrefabInstance:
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (12)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2091,10 +2075,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2232400440330722107, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 136.2
@@ -2138,10 +2118,6 @@ PrefabInstance:
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2710,10 +2686,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2232400440330722107, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 137.2
@@ -2757,10 +2729,6 @@ PrefabInstance:
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2824,10 +2792,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalEnv (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2884,10 +2848,6 @@ PrefabInstance:
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name
       value: FinalEnv (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2972,8 +2932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7799f1d4fade1094aa6bb075645ba982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 3
-  logInterval: 50
+  difficulty: 1
+  overwriteDifficulty: 1
+  logInterval: 5
 --- !u!4 &2068550472
 Transform:
   m_ObjectHideFlags: 0
@@ -3213,7 +3174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2217244322061388128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3645,22 +3606,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1125312689822709192, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: sheepUI
-      value: 
-      objectReference: {fileID: 2998998095351118967}
-    - target: {fileID: 1789760299411173773, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_BehaviorType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2700790888052775154, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 3459931577213750857, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.65
@@ -3701,25 +3646,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: area.w
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: area.x
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: area.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4348287283092642634, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: area.z
-      value: -15
-      objectReference: {fileID: 0}
     - target: {fileID: 4980094405418828748, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: useRLSheep
-      value: 1
+      propertyPath: MaxStep
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name

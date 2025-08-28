@@ -7,6 +7,7 @@ public class GameManger : MonoBehaviour
     public static GameManger Instance { get; private set; }
 
     public int difficulty = 3;
+    public bool overwriteDifficulty = false;
 
     private float timer = 0f;
     [SerializeField] private float logInterval = 5f;
@@ -45,16 +46,19 @@ public class GameManger : MonoBehaviour
 
     }
 
-   /* public void IncreaseDifficulty() {
+    public void IncreaseDifficulty() {
+
+        if (!overwriteDifficulty) { 
 
         if (episodeCount > 50) {
             GoalManager.Instance.SetMode(2);
         }
-        if (episodeCount > 100) {
-            GoalManager.Instance.SetMode(1);
-        } else return;
-   
-    }*/
+            if (episodeCount > 100) {
+                GoalManager.Instance.SetMode(1);
+
+            } else { GoalManager.Instance.SetMode(difficulty); }
+        }
+    }
     public void AddEpisode() {
         if (dogs == null || dogs.Length == 0) return;
 

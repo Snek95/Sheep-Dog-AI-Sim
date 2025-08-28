@@ -41,7 +41,7 @@ public class Dog : Agent {
     public override void OnEpisodeBegin() {
 
         GameManger.Instance.AddEpisode();
-        //GameManger.Instance.IncreaseDifficulty();
+        GameManger.Instance.IncreaseDifficulty();
         CurrentEpisode++;
         CumulativeReward = 0f;
         sheepsInGoal = 0;
