@@ -2934,6 +2934,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   overwriteDifficulty: 1
+  SheepCount: 10
+  obstacleCount: 10
+  useRLSheep: 0
   logInterval: 5
 --- !u!4 &2068550472
 Transform:
@@ -3645,10 +3648,6 @@ PrefabInstance:
     - target: {fileID: 3821549697250301541, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980094405418828748, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
-      propertyPath: MaxStep
-      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6550341394327777477, guid: 319e73f8863a42f4e93a742ae6953d39, type: 3}
       propertyPath: m_Name

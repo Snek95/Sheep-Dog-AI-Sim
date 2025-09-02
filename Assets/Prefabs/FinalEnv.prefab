@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sheepPrefab: {fileID: 4975794192835700409, guid: 0f1fdd6d6e40f424cbab7ea8ea02f7fb, type: 3}
-  spawnCount: 10
   spawnDistance: 15.15
   area: {x: -15, y: 15, z: -15, w: 15}
   speedMultiplier: 1
@@ -2903,11 +2902,10 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
+  MaxStep: 10000
   goal: {fileID: 4260821102090246684}
   moveSpeed: 2.5
   roationSpeed: 245
-  useRLSheep: 1
   sheepController: {fileID: 4348287283092642634}
   rlSheepController: {fileID: 1125312689822709192}
   spawnReference: {fileID: 1802065917219853050}
@@ -2915,10 +2913,9 @@ MonoBehaviour:
   - {fileID: 5409866378618964058, guid: 44618a9ad45b1a546981d474c4651a3d, type: 3}
   - {fileID: 1318277886820073866, guid: bcfee2347cfa4d94bb00801951b073e7, type: 3}
   - {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
-  obstacleAmount: 0
   optimalMinDist: 2
   optimalMaxDist: 5
-  timeScale: 1
+  timeScale: 5
   CurrentEpisode: 0
   CumulativeReward: 0
 --- !u!114 &1789760299411173773
@@ -2934,7 +2931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 0
+    VectorObservationSize: 33
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -2943,9 +2940,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: fd52b077d615e1945a2e7c6a85d0ab6a, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 068281c7253688e40a164a5383c25252, type: 3}
   m_InferenceDevice: 1
-  m_BehaviorType: 2
+  m_BehaviorType: 0
   m_BehaviorName: Dog
   TeamId: 0
   m_UseChildSensors: 1

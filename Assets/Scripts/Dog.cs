@@ -11,16 +11,23 @@ public class Dog : Agent {
     [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float roationSpeed = 0.001f;
 
-    public bool useRLSheep = true;
+    
+    private Vector3 last_known_goal_pos = Vector3.zero;
+    private Dictionary<int, Vector3> last_known_sheep_positions = new Dictionary<int, Vector3>();
+
+    private bool useRLSheep = false;
     [SerializeField] private SheepController sheepController;
     [SerializeField] private RLSheepController rlSheepController;
     [SerializeField] private Transform spawnReference;
     [SerializeField] private List<GameObject> obstacles;
-    [SerializeField] private int obstacleAmount;
+    private int obstacleAmount;
 
     public float optimalMinDist = 2f;
     public float optimalMaxDist = 5f;
     public float timeScale = 1f;
+
+    private int maxSheep = 10;
+    
 
     private Vector3 ogStablePos = new Vector3(-11.79f, 2.93f, -2.42f);
 
@@ -30,15 +37,25 @@ public class Dog : Agent {
     private Rigidbody rb;
     private int sheepsInGoal = 0;
 
+    private RayPerceptionSensorComponent3D raySensorComponent;
+
     private List<Transform> activeSheep = new List<Transform>();
     private Dictionary<Transform, float> sheepPrevDist = new Dictionary<Transform, float>();
 
     public override void Initialize() {
         rb = GetComponent<Rigidbody>();
         Time.timeScale = timeScale;
+        raySensorComponent = GetComponent<RayPerceptionSensorComponent3D>();
     }
 
     public override void OnEpisodeBegin() {
+
+        obstacleAmount = GameManger.Instance.obstacleCount;
+        maxSheep = GameManger.Instance.SheepCount;
+        useRLSheep = GameManger.Instance.useRLSheep;
+        // Lösche die gespeicherten Positionen zu Beginn jeder Episode
+        last_known_sheep_positions.Clear();
+        last_known_goal_pos = Vector3.zero;
 
         GameManger.Instance.AddEpisode();
         GameManger.Instance.IncreaseDifficulty();
@@ -52,7 +69,66 @@ public class Dog : Agent {
         GoalManager.Instance.UpdateGoalSides();
     }
 
+    public override void CollectObservations(VectorSensor sensor) {
+        if (raySensorComponent.RaySensor != null) {
+            var rayOutput = raySensorComponent.RaySensor.RayPerceptionOutput;
+
+            if (rayOutput != null && rayOutput.RayOutputs != null) {
+                var currentSheepSeen = new Dictionary<int, Vector3>();
+
+                foreach (var rayInfo in rayOutput.RayOutputs) {
+                    if (rayInfo.HitGameObject) {
+                        if (rayInfo.HitGameObject.CompareTag("Sheep")) {
+                            var sheepId = rayInfo.HitGameObject.GetInstanceID();
+                            currentSheepSeen[sheepId] = rayInfo.HitGameObject.transform.position;
+                        } else if (rayInfo.HitGameObject.CompareTag("Goal")) {
+                            last_known_goal_pos = rayInfo.HitGameObject.transform.position;
+                        }
+                    }
+                }
+
+                foreach (var entry in currentSheepSeen) {
+                    last_known_sheep_positions[entry.Key] = entry.Value;
+                }
+            }
+        }
+
+        float fieldSize = 37f; // maximale Spielfeldgröße zur Normalisierung
+
+        // Goal Position relativ zum Hund, skaliert
+        Vector3 relativeGoal = (last_known_goal_pos - transform.position) / fieldSize;
+        sensor.AddObservation(relativeGoal);
+
+        // Nur aktive Schafe berücksichtigen
+        var activeSheepPositions = last_known_sheep_positions.Values
+            .Where(pos => pos != null)
+            .ToList();
+
+        // Nach Distanz zum Hund sortieren und maximal maxSheep aufnehmen
+        var sortedSheep = activeSheepPositions
+            .OrderBy(pos => Vector3.Distance(transform.position, pos))
+            .Take(maxSheep)
+            .ToList();
+
+        int count = 0;
+        foreach (var sheepPos in sortedSheep) {
+            Vector3 relativeSheep = (sheepPos - transform.position) / fieldSize;
+            sensor.AddObservation(relativeSheep);
+            count++;
+        }
+
+        // Fehlende Plätze mit 0 auffüllen, damit Beobachtungsvektor konstant bleibt
+        for (; count < maxSheep; count++) {
+            sensor.AddObservation(Vector3.zero);
+        }
+    }
+
+    
+
+
     public override void OnActionReceived(ActionBuffers actions) {
+
+        
         MoveAgent(actions.DiscreteActions);
 
         // kleine Strafe pro Schritt, animiert Bewegung

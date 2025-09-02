@@ -6,7 +6,7 @@ public class SheepController : MonoBehaviour
 {
     public GameObject sheepPrefab;
 
-    public int spawnCount = 10;
+    private int spawnCount = 10;
 
     [Range(0.1f, 20.0f)]
     public float spawnDistance = 2.0f;
@@ -91,9 +91,13 @@ public class SheepController : MonoBehaviour
     [Tooltip("Kurve für die Fluchtreaktion vor dem Hund.")]
     public AnimationCurve dogFearCurve;
 
+
     
     public void Spawn()
     {
+
+        spawnCount = GameManger.Instance.SheepCount;
+
         for (var i = 0; i < spawnCount; i++)
         {
             Spawn(transform.position + new Vector3(Random.Range(-spawnDistance, spawnDistance), 0, Random.Range(-spawnDistance, spawnDistance)));

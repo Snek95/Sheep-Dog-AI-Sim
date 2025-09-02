@@ -35,7 +35,7 @@ public class RLSheepController : MonoBehaviour
 
     void Start()
     {
-        if (dog.GetComponent<Dog>().useRLSheep == false)
+        if (GameManger.Instance.useRLSheep == false)
         {
             gameObject.SetActive(false);
             return;

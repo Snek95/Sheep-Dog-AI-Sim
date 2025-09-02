@@ -9,6 +9,10 @@ public class GameManger : MonoBehaviour
     public int difficulty = 3;
     public bool overwriteDifficulty = false;
 
+    public int SheepCount = 10;
+    public int obstacleCount = 10;
+    public bool useRLSheep = false;
+
     private float timer = 0f;
     [SerializeField] private float logInterval = 5f;
 
