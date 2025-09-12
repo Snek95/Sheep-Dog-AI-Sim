@@ -22,8 +22,10 @@ public class Dog : Agent {
     [SerializeField] private List<GameObject> obstacles;
     private int obstacleAmount;
 
-    public float optimalMinDist = 2f;
-    public float optimalMaxDist = 5f;
+    public float optimalDist = 2f;
+    public float tolerance = 0.5f;
+
+
     public float timeScale = 1f;
 
     private int maxSheep = 10;
@@ -123,19 +125,21 @@ public class Dog : Agent {
         }
     }
 
-    
+
 
 
     public override void OnActionReceived(ActionBuffers actions) {
-
-        
         MoveAgent(actions.DiscreteActions);
 
         // kleine Strafe pro Schritt, animiert Bewegung
-        AddReward(-0.05f / MaxStep);
+        AddReward(-0.007f / MaxStep);
 
         float stepReward = 0f;
         Vector3 dogPos = transform.position;
+
+        // --- Abstand nur zum nächsten Schaf ---
+        Transform nearestSheep = null;
+        float nearestDist = float.MaxValue;
 
         foreach (Transform sheepChild in activeSheep.ToList()) {
             if (sheepChild == null || !sheepChild.gameObject.activeSelf) {
@@ -143,45 +147,74 @@ public class Dog : Agent {
                 continue;
             }
 
+            float dist = Vector3.Distance(dogPos, sheepChild.position);
+            if (dist < nearestDist) {
+                nearestDist = dist;
+                nearestSheep = sheepChild;
+            }
+        }
+
+        if (nearestSheep != null) {
+            
+
+            if (Mathf.Abs(nearestDist - optimalDist) <= tolerance) {
+                stepReward += 0.005f; // kleine Belohnung fürs Abstandhalten
+            } else {
+                stepReward -= 0.01f * Mathf.Abs(nearestDist - optimalDist);
+            }
+        }
+
+        // --- Einflussvektor & Fortschritt für alle Schafe ---
+        foreach (Transform sheepChild in activeSheep) {
+            if (sheepChild == null || !sheepChild.gameObject.activeSelf) continue;
+
             Vector3 sheepPos = sheepChild.position;
 
-            // 1. Abstandskontrolle (stärkere Bestrafung)
-            float dist = Vector3.Distance(dogPos, sheepPos);
-            if (dist >= optimalMinDist && dist <= optimalMaxDist)
-                stepReward += 0.004f;
-            else
-                stepReward -= 0.005f;
-
-            // 2. Einflussvektor
+            // Einflussvektor (Richtung Hund relativ zum Ziel)
             Vector3 toGoal = (goal.position - sheepPos).normalized;
             Vector3 toDog = (dogPos - sheepPos).normalized;
             float alignment = Vector3.Dot(toGoal, toDog);
-            stepReward += alignment * 0.0002f;
+            stepReward += alignment * 0.0001f; // geringes Gewicht, nur als Richtungsindikator
 
-            // 3. Fortschritt Richtung Ziel
+            // Fortschritt Richtung Ziel
             float newDist = Vector3.Distance(sheepPos, goal.position);
             if (sheepPrevDist.TryGetValue(sheepChild, out float prevDist)) {
-                if (newDist < prevDist) stepReward += 0.006f;
-                else stepReward -= 0.002f;
+                if (newDist < prevDist) stepReward += 0.004f;  // moderat belohnen
+                else stepReward -= 0.001f;
             }
             sheepPrevDist[sheepChild] = newDist;
         }
 
-        // Herdenkohäsion (weniger Strafe, mehr Belohnung)
+        // --- Herdenkohäsion (wichtigster Reward) ---
         HerdCohesionReward(activeSheep);
 
-        // Gruppenerfolg
-        stepReward += sheepsInGoal * 0.01f;
+        // --- Gruppenerfolg ---
+        stepReward += sheepsInGoal * 0.002f; // stärker gewichtet, wenn mehrere im Ziel
 
         AddReward(stepReward);
 
         // Endbedingung
         if (NoMoreSheepsLeft()) {
-            AddReward(150.0f); // deutlich höhere Belohnung
+            AddReward(200.0f); // große Belohnung für Abschluss
             EndEpisode();
         }
 
         CumulativeReward = GetCumulativeReward();
+    }
+
+    private void HerdCohesionReward(List<Transform> sheep) {
+        Vector3 center = CalcHerdCenter(sheep);
+        float cohesionReward = 0f;
+
+        foreach (var s in sheep) {
+            if (s == null || !s.gameObject.activeSelf) continue;
+
+            float distanceToCenter = Vector3.Distance(center, s.position);
+            if (distanceToCenter < 4f) cohesionReward += 0.005f; // höher gewichtet
+            else if (distanceToCenter > 6f) cohesionReward -= 0.002f;
+        }
+
+        AddReward(cohesionReward);
     }
 
     private Vector3 CalcHerdCenter(List<Transform> sheep) {
@@ -196,20 +229,8 @@ public class Dog : Agent {
         return count > 0 ? center / count : center;
     }
 
-    private void HerdCohesionReward(List<Transform> sheep) {
-        Vector3 center = CalcHerdCenter(sheep);
-        float cohesionReward = 0f;
+   
 
-        foreach (var s in sheep) {
-            if (s == null || !s.gameObject.activeSelf) continue;
-
-            float distanceToCenter = Vector3.Distance(center, s.position);
-            if (distanceToCenter < 4f) cohesionReward += 0.004f; // Belohnung leicht erhöht
-            else if (distanceToCenter > 6f) cohesionReward -= 0.0005f; // Strafe reduziert
-        }
-
-        AddReward(cohesionReward);
-    }
 
     private void SpawnObjects() {
         transform.localRotation = Quaternion.identity;
@@ -309,7 +330,7 @@ public class Dog : Agent {
     }
 
     public void GoalReached() {
-        AddReward(50.0f); // deutlich erhöht
+        AddReward(80.0f); // deutlich erhöht
         sheepsInGoal++;
         CumulativeReward = GetCumulativeReward();
 
@@ -323,12 +344,12 @@ public class Dog : Agent {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle"))
-            AddReward(-1f);
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Sheep"))
+            AddReward(-10f);
     }
 
     private void OnCollisionStay(Collision collision) {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle"))
-            AddReward(-0.01f);
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Sheep"))
+            AddReward(-0.2f);
     }
 }

@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_01
       objectReference: {fileID: 0}
+    - target: {fileID: 7405846476849542632, guid: c6308cb7062fac34e8e50600086b12a1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7405846476849542632, guid: c6308cb7062fac34e8e50600086b12a1, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7405846476849834440, guid: c6308cb7062fac34e8e50600086b12a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01461
@@ -113,6 +121,18 @@ PrefabInstance:
     - target: {fileID: 1318277886820073866, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
       propertyPath: m_Name
       value: Obstacle Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318277886820073866, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110680468385907539, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034025986398698151, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

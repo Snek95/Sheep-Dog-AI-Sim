@@ -1,0 +1,65 @@
+{
+    "RLSheep": {
+        "checkpoints": [
+            {
+                "steps": 49499975,
+                "file_path": "results\\sheeptest10\\RLSheep\\RLSheep-49499975.onnx",
+                "reward": null,
+                "creation_time": 1755925693.4120965,
+                "auxillary_file_paths": [
+                    "results\\sheeptest10\\RLSheep\\RLSheep-49499975.pt"
+                ]
+            },
+            {
+                "steps": 49999999,
+                "file_path": "results\\sheeptest10\\RLSheep\\RLSheep-49999999.onnx",
+                "reward": -22.303080369532108,
+                "creation_time": 1755926187.5322247,
+                "auxillary_file_paths": [
+                    "results\\sheeptest10\\RLSheep\\RLSheep-49999999.pt"
+                ]
+            },
+            {
+                "steps": 50000063,
+                "file_path": "results\\sheeptest10\\RLSheep\\RLSheep-50000063.onnx",
+                "reward": -22.303080369532108,
+                "creation_time": 1755926187.6049643,
+                "auxillary_file_paths": [
+                    "results\\sheeptest10\\RLSheep\\RLSheep-50000063.pt"
+                ]
+            },
+            {
+                "steps": 50499967,
+                "file_path": "results\\sheeptest10\\RLSheep\\RLSheep-50499967.onnx",
+                "reward": null,
+                "creation_time": 1755942897.5927882,
+                "auxillary_file_paths": [
+                    "results\\sheeptest10\\RLSheep\\RLSheep-50499967.pt"
+                ]
+            },
+            {
+                "steps": 50869183,
+                "file_path": "results\\sheeptest10\\RLSheep\\RLSheep-50869183.onnx",
+                "reward": null,
+                "creation_time": 1755943386.7850714,
+                "auxillary_file_paths": [
+                    "results\\sheeptest10\\RLSheep\\RLSheep-50869183.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 50869183,
+            "file_path": "results\\sheeptest10\\RLSheep.onnx",
+            "reward": null,
+            "creation_time": 1755943386.7850714,
+            "auxillary_file_paths": [
+                "results\\sheeptest10\\RLSheep\\RLSheep-50869183.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
