@@ -2,7 +2,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class GameManger : MonoBehaviour
+public class GameManger : MonoBehaviour //Eine globale Instanz auf die alle Scripte zugreifen können, in der Regel auch als Singleton Pattern bekannt0. Hier werden in der Regel allgemeine Einstellungen, wie z.B. Anzahl der Schafe, Schwierigkeitsgrad etc. gespeichert
 {
     public static GameManger Instance { get; private set; }
 

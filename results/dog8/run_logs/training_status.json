@@ -1,0 +1,29 @@
+{
+    "Dog": {
+        "checkpoints": [
+            {
+                "steps": 28168,
+                "file_path": "results\\dog8\\Dog\\Dog-28168.onnx",
+                "reward": null,
+                "creation_time": 1757685245.6322465,
+                "auxillary_file_paths": [
+                    "results\\dog8\\Dog\\Dog-28168.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 28168,
+            "file_path": "results\\dog8\\Dog.onnx",
+            "reward": null,
+            "creation_time": 1757685245.6322465,
+            "auxillary_file_paths": [
+                "results\\dog8\\Dog\\Dog-28168.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
