@@ -2339,7 +2339,7 @@ MonoBehaviour:
   - {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
   optimalDist: 4
   tolerance: 0.5
-  timeScale: 5
+  timeScale: 1
   CurrentEpisode: 0
   CumulativeReward: 0
 --- !u!114 &1789760299411173773

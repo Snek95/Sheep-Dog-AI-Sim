@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -6,20 +7,30 @@ public class GameManger : MonoBehaviour //Eine globale Instanz auf die alle Scri
 {
     public static GameManger Instance { get; private set; }
 
+    
     public int difficulty = 3;
     public bool overwriteDifficulty = false;
-
     public int SheepCount = 10;
     public int obstacleCount = 10;
     public bool useRLSheep = false;
-
     private float timer = 0f;
     [SerializeField] private float logInterval = 5f;
-
     private float episodeCount;
     private float meanReward;
-
     Dog[] dogs;
+
+
+    public event EventHandler OnStateChanged;
+    private bool PlayingFP = true;
+    private enum GameState {
+        MainMenu,
+        PlayingFP,
+        PlayingTP,
+        Paused,
+        GameOver
+    }
+
+    private GameState currentState;
 
     private void Awake() {
         Instance = this;
@@ -27,9 +38,11 @@ public class GameManger : MonoBehaviour //Eine globale Instanz auf die alle Scri
 
     private void Start() {
         dogs = FindObjectsByType<Dog>(FindObjectsSortMode.None);
+
+        currentState = GameState.MainMenu;
     }
 
-    private void Update() {
+   private void Update() {
 
         timer += Time.deltaTime;
 
@@ -39,6 +52,77 @@ public class GameManger : MonoBehaviour //Eine globale Instanz auf die alle Scri
         }
 
         GoalManager.Instance.SetMode(difficulty);
+
+        switch (currentState) {
+            case GameState.MainMenu:
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
+                break;
+
+            case GameState.PlayingFP:
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
+                break;
+
+            case GameState.PlayingTP:
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
+                break;
+
+            case GameState.Paused:
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
+                break;
+
+            case GameState.GameOver:
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
+                break;
+
+            default:
+                Debug.LogWarning("Unbekannter GameState!");
+                break;
+        }
+    }
+
+    public bool IsMainMenu() {
+        return currentState == GameState.MainMenu;
+    }
+
+    public bool IsPlayingTP() {
+        return currentState == GameState.PlayingTP;
+    }
+
+    public bool IsPlayingFP() {
+        return currentState == GameState.PlayingFP;
+    }
+
+    public bool IsPaused() {
+        return currentState == GameState.Paused;
+    }
+
+    public bool IsGameOver() {
+        return currentState == GameState.GameOver;
+    }
+
+    public void OnPressPlay() {
+
+        if (PlayingFP) {
+            currentState = GameState.PlayingFP;
+        } else {
+            currentState = GameState.PlayingTP;
+        }
+    }
+
+    public void OnPause() {
+        currentState = GameState.Paused;
+    }
+
+    public void OnGameOver() {
+        currentState = GameState.GameOver;
+    }
+
+    public void PlayFP() {
+        PlayingFP = true;
+    }
+
+    public void PlayTP() {
+        PlayingFP = false;
     }
 
     private void PrintMeanReward() {
@@ -49,7 +133,6 @@ public class GameManger : MonoBehaviour //Eine globale Instanz auf die alle Scri
         Debug.Log($"[GameManager] Durchschnittlicher Reward ({dogs.Length} Agents): {avgReward:F2} Episode: {episodeCount:F2}" );
 
     }
-
     public void IncreaseDifficulty() {
 
         if (!overwriteDifficulty) { 
@@ -69,4 +152,5 @@ public class GameManger : MonoBehaviour //Eine globale Instanz auf die alle Scri
         episodeCount += 1f / dogs.Length;
     }
 
+   
 }
