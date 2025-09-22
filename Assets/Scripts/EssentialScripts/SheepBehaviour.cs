@@ -94,7 +94,7 @@ public class SheepBehaviour : MonoBehaviour
         float xNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 10.0f)-0.46f;
         float zNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 20.0f)-0.46f;
         randomMovement = new Vector3(xNoise, 0, zNoise) * controller.randomMovementStrength;
-        Debug.Log($"Random Movement: {xNoise < 0}");
+        //Debug.Log($"Random Movement: {xNoise < 0}");
 
         // Draw debug lines for visualization
         Debug.DrawLine(currentPosition, currentPosition + separation, Color.red);

@@ -35,7 +35,7 @@ public class RLSheepController : MonoBehaviour
 
     void Start()
     {
-        if (GameManger.Instance.useRLSheep == false)
+        if (GameManager.Instance.useRLSheep == false)
         {
             gameObject.SetActive(false);
             return;

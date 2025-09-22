@@ -19,7 +19,7 @@ public class GoalManager : MonoBehaviour {
 
     private void Start() {
 
-        openSidesOverride = GameManger.Instance.difficulty;
+        openSidesOverride = GameManager.Instance.difficulty;
         UpdateGoalSides();
     }
 

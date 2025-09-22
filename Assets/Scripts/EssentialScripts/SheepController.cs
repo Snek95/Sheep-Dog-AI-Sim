@@ -91,12 +91,20 @@ public class SheepController : MonoBehaviour
     [Tooltip("Kurve für die Fluchtreaktion vor dem Hund.")]
     public AnimationCurve dogFearCurve;
 
+    private void Start() {
 
-    
+        GameManager.Instance.OnStateChanged += GM_OnStateChanged;
+    }
+
+    private void GM_OnStateChanged(object sender, System.EventArgs e) {
+        
+        dog = GameManager.Instance.GetDogRef();
+    }
+
     public void Spawn()
     {
 
-        spawnCount = GameManger.Instance.SheepCount;
+        spawnCount = GameManager.Instance.SheepCount;
 
         for (var i = 0; i < spawnCount; i++)
         {

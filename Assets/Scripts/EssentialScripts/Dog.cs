@@ -48,19 +48,34 @@ public class Dog : Agent {
         rb = GetComponent<Rigidbody>();
         Time.timeScale = timeScale;
         raySensorComponent = GetComponent<RayPerceptionSensorComponent3D>();
+        GameManager.Instance.OnStateChanged += GM_OnStateChanged;
+        GameManager.Instance.SetDogRef(gameObject.transform);
+    }
+
+   
+
+    private void GM_OnStateChanged(object sender, System.EventArgs e) {
+        if (GameManager.Instance.IsPlayingFP() || GameManager.Instance.IsPlayingTP()) {
+            Hide();
+        }
+    }
+
+    private void Hide() {
+
+        gameObject.SetActive(false);
     }
 
     public override void OnEpisodeBegin() {
 
-        obstacleAmount = GameManger.Instance.obstacleCount;
-        maxSheep = GameManger.Instance.SheepCount;
-        useRLSheep = GameManger.Instance.useRLSheep;
+        obstacleAmount = GameManager.Instance.obstacleCount;
+        maxSheep = GameManager.Instance.SheepCount;
+        useRLSheep = GameManager.Instance.useRLSheep;
         // Lösche die gespeicherten Positionen zu Beginn jeder Episode
         last_known_sheep_positions.Clear();
         last_known_goal_pos = Vector3.zero;
 
-        GameManger.Instance.AddEpisode();
-        GameManger.Instance.IncreaseDifficulty();
+        GameManager.Instance.AddEpisode();
+        GameManager.Instance.IncreaseDifficulty();
         CurrentEpisode++;
         CumulativeReward = 0f;
         sheepsInGoal = 0;
@@ -69,6 +84,8 @@ public class Dog : Agent {
 
         SpawnObjects();
         GoalManager.Instance.UpdateGoalSides();
+
+        Debug.Log("New Ep");
     }
 
     public override void CollectObservations(VectorSensor sensor) {

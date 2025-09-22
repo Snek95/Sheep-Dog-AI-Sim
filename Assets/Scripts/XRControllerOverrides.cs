@@ -6,37 +6,39 @@ public class XRControllerOverrides : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManger.Instance.OnStateChanged += GameManager_OnStateChanged;
+        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
     }
 
     private void GameManager_OnStateChanged(object sender, System.EventArgs e) {
 
-        if (GameManger.Instance.IsMainMenu()) {
+        if (GameManager.Instance.IsMainMenu()) {
 
             LocoMotionController.SetActive(false);
         }
 
-        if (GameManger.Instance.IsPaused()) {
+        if (GameManager.Instance.IsPaused()) {
 
             LocoMotionController.SetActive(false);
         }
 
-        if (GameManger.Instance.IsPlayingFP()) {
+        if (GameManager.Instance.IsPlayingFP()) {
 
             LocoMotionController.SetActive(true);
         }
 
-        if (GameManger.Instance.IsPlayingTP()) {
+        if (GameManager.Instance.IsPlayingTP()) {
 
             LocoMotionController.SetActive(false);
         }
 
-        if (GameManger.Instance.IsGameOver()) {
+        if (GameManager.Instance.IsGameOver()) {
 
             LocoMotionController.SetActive(false);
         }
 
     }
+
+
 
     // Update is called once per frame
     void Update()
