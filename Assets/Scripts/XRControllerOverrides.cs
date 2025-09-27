@@ -7,16 +7,12 @@ public class XRControllerOverrides : MonoBehaviour
     void Start()
     {
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        LocoMotionController.SetActive(false);
     }
 
     private void GameManager_OnStateChanged(object sender, System.EventArgs e) {
 
         if (GameManager.Instance.IsMainMenu()) {
-
-            LocoMotionController.SetActive(false);
-        }
-
-        if (GameManager.Instance.IsPaused()) {
 
             LocoMotionController.SetActive(false);
         }
@@ -36,13 +32,20 @@ public class XRControllerOverrides : MonoBehaviour
             LocoMotionController.SetActive(false);
         }
 
+        if (GameManager.Instance.IsPaused()) {
+
+            LocoMotionController.SetActive(false);
+        }
+
+        if (GameManager.Instance.IsPlaying()) {
+
+            LocoMotionController.SetActive(true);
+        }
+
+
     }
 
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }
