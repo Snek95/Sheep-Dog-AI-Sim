@@ -97,7 +97,11 @@ public class SheepController : MonoBehaviour
     }
 
     private void GM_OnStateChanged(object sender, System.EventArgs e) {
-        
+        if (!dog.GetComponent<Dog>().isOpponentDog)
+        Invoke("UpdateDogRef", 0.1f);
+    }
+    
+    private void UpdateDogRef() {
         dog = GameManager.Instance.GetDogRef();
     }
 
@@ -110,7 +114,7 @@ public class SheepController : MonoBehaviour
         {
             Spawn(transform.position + new Vector3(Random.Range(-spawnDistance, spawnDistance), 0, Random.Range(-spawnDistance, spawnDistance)));
         }
-        
+
     }
 
     public GameObject Spawn(Vector3 position)

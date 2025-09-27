@@ -64,7 +64,7 @@ public class GoalManager : MonoBehaviour {
                 break;
 
             default:
-                Debug.Log("Kein gültiger Wert (nicht 1-5)");
+                Debug.Log("Kein gueltiger Wert (nicht 1-3)");
                 break;
         }
     }

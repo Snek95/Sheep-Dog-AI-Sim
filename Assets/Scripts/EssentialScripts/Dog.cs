@@ -20,6 +20,7 @@ public class Dog : Agent {
     [SerializeField] private RLSheepController rlSheepController;
     [SerializeField] private Transform spawnReference;
     [SerializeField] private List<GameObject> obstacles;
+    public bool isOpponentDog = false;
     private int obstacleAmount;
 
     public float optimalDist = 2f;
@@ -29,6 +30,8 @@ public class Dog : Agent {
     public float timeScale = 1f;
 
     private int maxSheep = 10;
+
+    
     
 
     private Vector3 ogStablePos = new Vector3(-11.79f, 2.93f, -2.42f);
@@ -44,19 +47,34 @@ public class Dog : Agent {
     private List<Transform> activeSheep = new List<Transform>();
     private Dictionary<Transform, float> sheepPrevDist = new Dictionary<Transform, float>();
 
-    public override void Initialize() {
-        rb = GetComponent<Rigidbody>();
-        Time.timeScale = timeScale;
-        raySensorComponent = GetComponent<RayPerceptionSensorComponent3D>();
+public override void Initialize()
+{
+    rb = GetComponent<Rigidbody>();
+    Time.timeScale = timeScale;
+    raySensorComponent = GetComponent<RayPerceptionSensorComponent3D>();
+
+    if (GameManager.Instance != null)
+    {
         GameManager.Instance.OnStateChanged += GM_OnStateChanged;
         GameManager.Instance.SetDogRef(gameObject.transform);
     }
-
+    else
+    {
+        Debug.LogError("GameManager.Instance is null. Ensure GameManager is in the scene and initialized.");
+    }
+}
    
 
     private void GM_OnStateChanged(object sender, System.EventArgs e) {
         if (GameManager.Instance.IsPlayingFP() || GameManager.Instance.IsPlayingTP()) {
-            Hide();
+            if (!isOpponentDog)
+            {
+                Hide();
+            }
+            else
+            {
+                OnEpisodeBegin();
+            }
         }
     }
 
@@ -75,7 +93,7 @@ public class Dog : Agent {
         last_known_goal_pos = Vector3.zero;
 
         GameManager.Instance.AddEpisode();
-        GameManager.Instance.IncreaseDifficulty();
+        //GameManager.Instance.IncreaseDifficulty();
         CurrentEpisode++;
         CumulativeReward = 0f;
         sheepsInGoal = 0;
@@ -288,8 +306,8 @@ public class Dog : Agent {
     }
 
     private void SpawnRandomGoal() {
-        float goalX = Random.Range(-12f, 12f);
-        float goalZ = Random.Range(-12f, 12f);
+        float goalX = UnityEngine.Random.Range(-12f, 12f);
+        float goalZ = UnityEngine.Random.Range(-12f, 12f);
 
         Vector3 randomGoalPos = new Vector3(spawnReference.position.x + goalX, 0.63f, spawnReference.position.z + goalZ);
 
@@ -304,11 +322,11 @@ public class Dog : Agent {
         for (int i = 0; i < obstacleAmount; i++) {
             if (obstacles.Count == 0) return;
 
-            GameObject prefab = obstacles[Random.Range(0, obstacles.Count)];
-            float x = Random.Range(-12f, 12f);
-            float z = Random.Range(-12f, 12f);
+            GameObject prefab = obstacles[UnityEngine.Random.Range(0, obstacles.Count)];
+            float x = UnityEngine.Random.Range(-12f, 12f);
+            float z = UnityEngine.Random.Range(-12f, 12f);
             Vector3 pos = new Vector3(spawnReference.position.x + x, 0f, spawnReference.position.z + z);
-            Quaternion rot = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            Quaternion rot = Quaternion.Euler(0f, UnityEngine.Random.Range(0f, 360f), 0f);
             GameObject instance = Instantiate(prefab, pos, rot, spawnReference);
             instance.tag = "Obstacle";
         }
@@ -346,14 +364,19 @@ public class Dog : Agent {
         else if (Keyboard.current.aKey.isPressed) discreteActionsOut[0] = 2;
     }
 
-    public void GoalReached() {
+    public void GoalReached()
+    {
         AddReward(80.0f); // deutlich erhöht
         sheepsInGoal++;
         CumulativeReward = GetCumulativeReward();
 
         activeSheep = activeSheep.Where(s => s != null && s.gameObject.activeSelf).ToList();
 
-        if (NoMoreSheepsLeft()) EndEpisode();
+        if (NoMoreSheepsLeft())
+        {
+            //EndEpisode();
+            
+        }
     }
 
     private bool NoMoreSheepsLeft() {

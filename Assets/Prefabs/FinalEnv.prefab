@@ -93,20 +93,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1.0038054
-      inSlope: -0.9308782
-      outSlope: -0.9308782
+      inSlope: -0.7138619
+      outSlope: -0.7138619
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.42470986
-      outWeight: 0.121267684
+      outWeight: 0.0506911
     - serializedVersion: 3
-      time: 2.58891
-      value: -0.0000006556511
-      inSlope: -0.00094382674
-      outSlope: -0.00094382674
+      time: 3.8321657
+      value: 0.0019524693
+      inSlope: -0.04616579
+      outSlope: -0.04616579
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.5195087
+      inWeight: 0.18894234
       outWeight: 0.3769911
     - serializedVersion: 3
       time: 3.8523118
@@ -2370,7 +2370,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 7000
+  MaxStep: 700000
   goal: {fileID: 4260821102090246684}
   moveSpeed: 2.5
   roationSpeed: 150
@@ -2381,6 +2381,7 @@ MonoBehaviour:
   - {fileID: 5409866378618964058, guid: 44618a9ad45b1a546981d474c4651a3d, type: 3}
   - {fileID: 1318277886820073866, guid: bcfee2347cfa4d94bb00801951b073e7, type: 3}
   - {fileID: 9207980535614664345, guid: 8cf9b01304a743c449871d454f1dff05, type: 3}
+  isOpponentDog: 0
   optimalDist: 4
   tolerance: 0.5
   timeScale: 1
