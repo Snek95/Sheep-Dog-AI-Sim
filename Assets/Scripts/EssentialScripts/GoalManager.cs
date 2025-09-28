@@ -6,7 +6,7 @@ public class GoalManager : MonoBehaviour {
 
     public static GoalManager Instance { get; private set; }
 
-    [SerializeField] GameObject[] stableSides; //Reihenfolge: vorne, hinten, links, rechts
+    [SerializeField] GameObject trigger; //Reihenfolge: vorne, hinten, links, rechts
     private int openSidesOverride = 3;
 
     private bool spawnObstacles = false;
@@ -28,36 +28,23 @@ public class GoalManager : MonoBehaviour {
         //float openSidesValue = Academy.Instance.EnvironmentParameters.GetWithDefault("goal_open_sides", 4);
         //int openSides = Mathf.RoundToInt(openSidesValue);
 
-        foreach (GameObject go in stableSides) {
-            go.SetActive(true);
-        }
-
         switch (openSidesOverride) {
             case 1: //Vierseitiges Ziel, mit Obstacles, mit Random Goal
-                stableSides[0].SetActive(true);
-                stableSides[1].SetActive(true);
-                stableSides[2].SetActive(true);
-                stableSides[3].SetActive(true);
+                trigger.SetActive(true);
                 spawnObstacles = true;
                 randomGoalLocation = true;
                 Debug.Log("Mode 1");
                 break;
 
             case 2: //Vierseitiges Ziel, keine Obstacles, Random Goal
-                stableSides[0].SetActive(true);
-                stableSides[1].SetActive(true);
-                stableSides[2].SetActive(true);
-                stableSides[3].SetActive(true);
+                trigger.SetActive(true);
                 spawnObstacles = false;
                 randomGoalLocation = true;
                 Debug.Log("Mode 2");
                 break;
 
             case 3: //Vierseitiges Ziel, keine Obstacles, kein random Goal
-                stableSides[0].SetActive(true);
-                stableSides[1].SetActive(true);
-                stableSides[2].SetActive(true);
-                stableSides[3].SetActive(true);
+                trigger.SetActive(true);
                 spawnObstacles = false;
                 randomGoalLocation = false;
                 Debug.Log("Mode 3");

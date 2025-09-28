@@ -16,6 +16,9 @@ public class PlayerDog : MonoBehaviour {
     [SerializeField] private Transform bonePointerOrigin;
     [SerializeField] private GameObject dumbDog;
     [SerializeField] private GameObject bone;
+
+    public InputActionReference xButtonAction;
+    public InputActionReference yButtonAction;
     private int obstacleAmount;
     private int maxSheep = 10;
     private bool useRLSheep = false;
@@ -26,29 +29,51 @@ public class PlayerDog : MonoBehaviour {
     
 
     private Vector3 ogStablePos = new Vector3(-11.79f, 2.93f, -2.42f);
+    private Vector3 originalDumbDogPosition = new Vector3(-9.59f,2.73f,5.759f);
+    private Vector3 mainMenuPosition = new Vector3(-2.5f,0.81f,-10.39f);
+
     private List<Transform> activeSheep = new List<Transform>();
 
     [HideInInspector] public int CurrentEpisode = 0;
     [HideInInspector] public float CumulativeReward = 0f;
 
-    private int sheepsInGoal = 0;
+    public int sheepsInGoal = 0;
 
-    private void Awake() {
+    private void Awake()
+    {
         playerInput = GetComponent<PlayerInput>();
         if (playerInput == null)
         {
             Debug.LogError("PlayerInput component not found on PlayerDog.");
         }
+        xButtonAction.action.Enable();
+        xButtonAction.action.performed += ctx =>
+        {
+            Debug.Log("X Button Pressed - Restarting Game");
+            GameManager.Instance.SetState(GameManager.GameState.MainMenu);
+            GameManager.Instance.OnPressPlay();
+        };
+        yButtonAction.action.Enable();
+        yButtonAction.action.performed += ctx =>
+        {
+            Debug.Log("Y Button Pressed - Going to Main Menu");
+            GameManager.Instance.SetState(GameManager.GameState.MainMenu);
+            transform.position = mainMenuPosition;
+            bone.SetActive(false);
+            dumbDog.SetActive(false);
+        };
     }
 
     void Start()
     {
 
         GameManager.Instance.OnStateChanged += GM_OnStateChanged;
+
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    private void StartFP() {
+    private void StartFP()
+    {
 
         obstacleAmount = GameManager.Instance.obstacleCount;
         maxSheep = GameManager.Instance.SheepCount;
@@ -56,6 +81,7 @@ public class PlayerDog : MonoBehaviour {
         sheepsInGoal = 0;
         SpawnObjects();
         transform.localPosition = new Vector3(-8.45f, 3f, -28f);
+        transform.Rotate(0f, 180f, 0f);
     }
 
     private void StartTP()
@@ -67,7 +93,6 @@ public class PlayerDog : MonoBehaviour {
         SpawnObjects();
         transform.localPosition = spawnpointTP.position;
         bone.transform.SetPositionAndRotation(dumbDog.transform.position, Quaternion.identity);
-        GameManager.Instance.SetDogRef(dumbDog.transform);
         moveProvider.SetActive(true);
     }
 
@@ -82,6 +107,7 @@ public class PlayerDog : MonoBehaviour {
         {
             bone.SetActive(true);
             dumbDog.SetActive(true);
+            dumbDog.transform.SetLocalPositionAndRotation(originalDumbDogPosition, Quaternion.identity);
             GameManager.Instance.SetDogRef(dumbDog.transform);
             StartTP();
 
@@ -104,15 +130,24 @@ public class PlayerDog : MonoBehaviour {
                     lineRenderer.SetPosition(0, bonePointerOrigin.position);
                     lineRenderer.SetPosition(1, hit.point);
                     lineRenderer.enabled = true;
-                } else
+                }
+                else
                 {
                     lineRenderer.enabled = false;
                 }
-            } else
+            }
+            else
             {
                 lineRenderer.enabled = false;
             }
-            
+
+        }
+
+        //Restart game
+        if (playerInput.actions["xButton"].WasPressedThisFrame())
+        {
+            Debug.Log("X Button Pressed - Restarting Game");
+            GameManager.Instance.OnPressPlay();
         }
     }
 
@@ -193,7 +228,8 @@ public class PlayerDog : MonoBehaviour {
     
 
     public void GoalReached() {        
-        sheepsInGoal++;   
+        sheepsInGoal++;
+        Debug.Log($"Sheep in Goal: {sheepsInGoal}/{maxSheep}. PlayerDog");   
 
         activeSheep = activeSheep.Where(s => s != null && s.gameObject.activeSelf).ToList();
 

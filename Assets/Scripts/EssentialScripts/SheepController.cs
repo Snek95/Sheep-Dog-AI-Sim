@@ -97,8 +97,12 @@ public class SheepController : MonoBehaviour
     }
 
     private void GM_OnStateChanged(object sender, System.EventArgs e) {
-        if (!dog.GetComponent<Dog>().isOpponentDog)
-        Invoke("UpdateDogRef", 0.1f);
+        Dog dogComponent;
+        if (dog.TryGetComponent<Dog>(out dogComponent))
+        {
+            if(!dogComponent.isOpponentDog) Invoke("UpdateDogRef", 0.1f);
+        }
+            
     }
     
     private void UpdateDogRef() {
@@ -107,12 +111,17 @@ public class SheepController : MonoBehaviour
 
     public void Spawn()
     {
-
+        UpdateDogRef();
         spawnCount = GameManager.Instance.SheepCount;
 
         for (var i = 0; i < spawnCount; i++)
         {
-            Spawn(transform.position + new Vector3(Random.Range(-spawnDistance, spawnDistance), 0, Random.Range(-spawnDistance, spawnDistance)));
+            GameObject sheep = Spawn(transform.position + new Vector3(Random.Range(-spawnDistance, spawnDistance), 0, Random.Range(-spawnDistance, spawnDistance)));
+            Dog dogComponent;
+            if (dog.TryGetComponent<Dog>(out dogComponent))
+            {
+                dogComponent.activeSheep.Add(sheep.transform);
+            }
         }
 
     }

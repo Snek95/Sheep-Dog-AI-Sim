@@ -8,11 +8,8 @@ public class DumbDog : MonoBehaviour
     [SerializeField] private float rotationCoeff = 3f;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float activationRange = 1f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+ 
+ 
 
     // Update is called once per frame
     void Update()

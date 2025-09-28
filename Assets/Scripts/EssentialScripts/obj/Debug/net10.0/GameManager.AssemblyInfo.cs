@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
+/* using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameManager")]
@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameManager")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")] */
 
 // Von der MSBuild WriteCodeFragment-Klasse generiert.
 

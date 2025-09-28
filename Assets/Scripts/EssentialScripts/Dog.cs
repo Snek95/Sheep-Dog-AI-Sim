@@ -31,20 +31,19 @@ public class Dog : Agent {
 
     private int maxSheep = 10;
 
-    
-    
-
     private Vector3 ogStablePos = new Vector3(-11.79f, 2.93f, -2.42f);
+
+    private Vector3 originalDogPosition = new Vector3(-13.97f, 2.829f, 2.25f);
 
     [HideInInspector] public int CurrentEpisode = 0;
     [HideInInspector] public float CumulativeReward = 0f;
 
     private Rigidbody rb;
-    private int sheepsInGoal = 0;
+    public int sheepsInGoal = 0;
 
     private RayPerceptionSensorComponent3D raySensorComponent;
 
-    private List<Transform> activeSheep = new List<Transform>();
+    public List<Transform> activeSheep = new List<Transform>();
     private Dictionary<Transform, float> sheepPrevDist = new Dictionary<Transform, float>();
 
 public override void Initialize()
@@ -79,7 +78,7 @@ public override void Initialize()
     }
 
     private void Hide() {
-
+        GameManager.Instance.OnStateChanged -= GM_OnStateChanged;
         gameObject.SetActive(false);
     }
 
@@ -99,7 +98,8 @@ public override void Initialize()
         sheepsInGoal = 0;
         sheepPrevDist.Clear();
         activeSheep.Clear();
-
+        transform.position = originalDogPosition;
+        transform.rotation = Quaternion.identity;
         SpawnObjects();
         GoalManager.Instance.UpdateGoalSides();
 
@@ -178,7 +178,8 @@ public override void Initialize()
 
         foreach (Transform sheepChild in activeSheep.ToList()) {
             if (sheepChild == null || !sheepChild.gameObject.activeSelf) {
-                activeSheep.Remove(sheepChild);
+                activeSheep = activeSheep.Where(s => s != null && s.gameObject.activeSelf).ToList();
+                //activeSheep.Remove(sheepChild);
                 continue;
             }
 
@@ -229,10 +230,10 @@ public override void Initialize()
         AddReward(stepReward);
 
         // Endbedingung
-        if (NoMoreSheepsLeft()) {
+        /* if (NoMoreSheepsLeft()) {
             AddReward(200.0f); // große Belohnung für Abschluss
             EndEpisode();
-        }
+        } */
 
         CumulativeReward = GetCumulativeReward();
     }
@@ -296,10 +297,6 @@ public override void Initialize()
             if (sheepController == null) return;
             sheepController.DestroyAllChildren();
             sheepController.Spawn();
-            foreach (Transform sheep in sheepController.transform) {
-                if (sheep != null && sheep.gameObject.activeSelf)
-                    activeSheep.Add(sheep);
-            }
         }
 
         rb.linearDamping = 15f;
@@ -366,21 +363,36 @@ public override void Initialize()
 
     public void GoalReached()
     {
-        AddReward(80.0f); // deutlich erhöht
+        /* AddReward(80.0f); // deutlich erhöht
         sheepsInGoal++;
         CumulativeReward = GetCumulativeReward();
 
         activeSheep = activeSheep.Where(s => s != null && s.gameObject.activeSelf).ToList();
+        Debug.Log("Sheeps left: " + activeSheep.Count);
+        if (activeSheep.Count > 0)
+        Debug.Log(activeSheep[0]);
 
         if (NoMoreSheepsLeft())
         {
+            Debug.Log("All sheeps in goal");
             //EndEpisode();
-            
+            GameManager.Instance.OnGameOver();
+        } */
+
+        if (isOpponentDog)
+        {
+            sheepsInGoal++;
+            Debug.Log($"Sheep in Goal: {sheepsInGoal}/{maxSheep}. OpponentDog");
+            if (sheepsInGoal >= GameManager.Instance.SheepCount)
+            {
+                GameManager.Instance.OnGameOver();
+            }
         }
     }
 
     private bool NoMoreSheepsLeft() {
-        return activeSheep.Count == 0;
+        if (sheepsInGoal >= GameManager.Instance.SheepCount) Debug.Log("NoMoreSheepLeft check: " + (sheepsInGoal >= GameManager.Instance.SheepCount));
+        return sheepsInGoal >= GameManager.Instance.SheepCount;
     }
 
     private void OnCollisionEnter(Collision collision) {
