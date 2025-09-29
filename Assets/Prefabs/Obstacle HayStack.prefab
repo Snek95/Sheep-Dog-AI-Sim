@@ -34,11 +34,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7466019571497431494, guid: 2b1ed34ec32078b4aacce19a3cc6713c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.278
       objectReference: {fileID: 0}
     - target: {fileID: 7466019571497431494, guid: 2b1ed34ec32078b4aacce19a3cc6713c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.56
+      value: 0.558
       objectReference: {fileID: 0}
     - target: {fileID: 7466019571497431494, guid: 2b1ed34ec32078b4aacce19a3cc6713c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -137,6 +137,22 @@ PrefabInstance:
     - target: {fileID: 1318277886820073866, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
       propertyPath: m_Name
       value: Obstacle HayStack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255403751311639649, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.778
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255403751311639649, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791385266189712322, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.778
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791385266189712322, guid: 35273943897bf054f8bc07977c2531a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
