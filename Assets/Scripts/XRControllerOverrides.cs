@@ -7,6 +7,7 @@ public class XRControllerOverrides : MonoBehaviour
     void Start()
     {
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        LocoMotionController.SetActive(false);
     }
 
     private void GameManager_OnStateChanged(object sender, System.EventArgs e) {
