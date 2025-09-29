@@ -94,7 +94,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4794edbe504c42f439d17c725720751c, type: 2}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 41a7cda4a4c9aa249a015af83c657f7f, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1346,7 +1346,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1379,7 +1379,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -7583,12 +7583,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358d3fcb428db4844a5f7c55ea9ce759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
-  overwriteDifficulty: 1
   SheepCount: 10
   obstacleCount: 5
   useRLSheep: 0
-  logInterval: 5
+  startingPosition: {fileID: 0}
+  mainMenuUI: {fileID: 0}
+  playerCharacter: {fileID: 0}
 --- !u!1 &2092139007
 GameObject:
   m_ObjectHideFlags: 0

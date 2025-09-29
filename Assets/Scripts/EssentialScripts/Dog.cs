@@ -91,7 +91,7 @@ public override void Initialize()
         last_known_sheep_positions.Clear();
         last_known_goal_pos = Vector3.zero;
 
-        GameManager.Instance.AddEpisode();
+        
         //GameManager.Instance.IncreaseDifficulty();
         CurrentEpisode++;
         CumulativeReward = 0f;
