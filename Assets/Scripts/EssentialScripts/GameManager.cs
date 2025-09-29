@@ -5,24 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
 
-    public int difficulty = 3;
-    public bool overwriteDifficulty = false;
     public int SheepCount = 10;
     public int obstacleCount = 10;
-    public bool useRLSheep = false;
-    private float timer = 0f;
-    [SerializeField] private float logInterval = 5f;
-    private float episodeCount;
-    private float meanReward;
-    Dog[] dogs;
-
+    public bool useRLSheep = false;  
+  
     private Transform activeDogRef;
+    [SerializeField] private Transform startingPosition;
+    [SerializeField] private GameObject mainMenuUI;
+    [SerializeField] private GameObject playerCharacter;
 
     public event EventHandler OnStateChanged;
     private bool PlayingFP = true;
 
     public enum GameState {
         MainMenu,
+        Starting,
+        Playing,
         PlayingFP,
         PlayingTP,
         Paused,
@@ -33,23 +31,15 @@ public class GameManager : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
+        
     }
 
     private void Start() {
-        dogs = FindObjectsByType<Dog>(FindObjectsSortMode.None);
+        
         SetState(GameState.MainMenu);
     }
 
-    private void Update() {
-        timer += Time.deltaTime;
-
-        if (timer > logInterval) {
-            //PrintMeanReward();
-            timer = 0f;
-        }
-
-        GoalManager.Instance.SetMode(difficulty);
-    }
+    
 
     // ----------------------
     // State Handling
@@ -58,6 +48,7 @@ public class GameManager : MonoBehaviour {
         if (currentState != newState) {
             currentState = newState;
             OnStateChanged?.Invoke(this, EventArgs.Empty);
+            Debug.Log(currentState.ToString());
         }
     }
 
@@ -66,17 +57,29 @@ public class GameManager : MonoBehaviour {
     public bool IsPlayingFP() => currentState == GameState.PlayingFP;
     public bool IsPaused() => currentState == GameState.Paused;
     public bool IsGameOver() => currentState == GameState.GameOver;
+    public bool IsPlaying() => currentState == GameState.Playing;
+    public bool IsStarting() => currentState == GameState.Starting;
 
     public void OnPressPlay() {
         if (PlayingFP) {
             SetState(GameState.PlayingFP);
+            SetState(GameState.Starting);
+            SetState(GameState.Playing);
+            mainMenuUI.SetActive(false);
         } else {
             SetState(GameState.PlayingTP);
+            SetState(GameState.Starting);
+            SetState(GameState.Playing);
+            mainMenuUI.SetActive(false);
         }
     }
 
-    public void OnPause() {
-        SetState(GameState.Paused);
+    public void OnPause(bool isPaused) {
+        if (isPaused) {
+            SetState(GameState.Paused);
+        } else {
+            SetState(GameState.Playing);
+        }
     }
 
     public void OnGameOver() {
@@ -91,31 +94,14 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    
-
-    /*private void PrintMeanReward() {
-        dogs = FindObjectsByType<Dog>(FindObjectsSortMode.None);
-        float avgReward = dogs.Average(d => d.CumulativeReward);
-        Debug.Log($"[GameManager] Durchschnittlicher Reward ({dogs.Length} Agents): {avgReward:F2} Episode: {episodeCount:F2}");
-    }*/
-
-    public void IncreaseDifficulty() {
-        if (!overwriteDifficulty) {
-            if (episodeCount > 50) {
-                GoalManager.Instance.SetMode(2);
-            }
-            if (episodeCount > 100) {
-                GoalManager.Instance.SetMode(1);
-            } else {
-                GoalManager.Instance.SetMode(difficulty);
-            }
-        }
+    public void ReturnToMenu() {
+        SetState(GameState.MainMenu);
+        mainMenuUI.SetActive(true);
+        playerCharacter.transform.position = startingPosition.position;
+        playerCharacter.transform.rotation = startingPosition.rotation;
+        
     }
-
-    public void AddEpisode() {
-        if (dogs == null || dogs.Length == 0) return;
-        episodeCount += 1f / dogs.Length;
-    }
+       
 
     public void ToggleRLSheep(bool rlsheepToggle) {
         useRLSheep = rlsheepToggle;
