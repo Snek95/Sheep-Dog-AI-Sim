@@ -48,11 +48,14 @@ public class Dog : Agent {
         rb = GetComponent<Rigidbody>();
         Time.timeScale = timeScale;
         raySensorComponent = GetComponent<RayPerceptionSensorComponent3D>();
+        
+        
+    }
+
+    private void Start() {
         GameManager.Instance.OnStateChanged += GM_OnStateChanged;
         GameManager.Instance.SetDogRef(gameObject.transform);
     }
-
-   
 
     private void GM_OnStateChanged(object sender, System.EventArgs e) {
         if (GameManager.Instance.IsPlayingFP() || GameManager.Instance.IsPlayingTP()) {
@@ -82,7 +85,7 @@ public class Dog : Agent {
         activeSheep.Clear();
 
         SpawnObjects();
-        GoalManager.Instance.UpdateGoalSides();
+        
 
         Debug.Log("New Ep");
     }

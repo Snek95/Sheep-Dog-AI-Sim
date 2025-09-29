@@ -16,7 +16,7 @@ public class PlayerDog : MonoBehaviour {
     [SerializeField] private Transform spawnReference;
     [SerializeField] private List<GameObject> obstacles;
 
-    private int obstacleAmount;
+    private int obstacleCount;
     private int maxSheep = 10;
     private bool useRLSheep = false;
 
@@ -37,12 +37,12 @@ public class PlayerDog : MonoBehaviour {
 
     private void Restart() {
 
-        obstacleAmount = GameManager.Instance.obstacleCount;
+        obstacleCount = GameManager.Instance.obstacleCount;
         maxSheep = GameManager.Instance.SheepCount;
         useRLSheep = GameManager.Instance.useRLSheep;
         sheepsInGoal = 0;
         SpawnObjects();
-        transform.localPosition = new Vector3(-8.45f, 3f, -28f);
+        transform.localPosition = new Vector3(-8.45f, 1f, -28f);
     }
 
     private void GM_OnStateChanged(object sender, System.EventArgs e) {
@@ -108,7 +108,7 @@ public class PlayerDog : MonoBehaviour {
             if (child.CompareTag("Obstacle")) Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < obstacleAmount; i++) {
+        for (int i = 0; i < obstacleCount; i++) {
             if (obstacles.Count == 0) return;
 
             GameObject prefab = obstacles[Random.Range(0, obstacles.Count)];

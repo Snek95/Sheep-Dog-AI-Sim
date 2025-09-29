@@ -22,17 +22,24 @@ public class VRPauseMenu : MonoBehaviour
     }
 
     private void OnEnable() {
-
-        pauseAction.action.performed += TogglePause;
-        pauseAction.action.Enable();
+        
+            pauseAction.action.performed += TogglePauseInput;
+            pauseAction.action.Enable();
+        
     }
 
     private void OnDisable() {
-        pauseAction.action.performed -= TogglePause;
+        pauseAction.action.performed -= TogglePauseInput;
         pauseAction.action.Disable();
     }
 
-    private void TogglePause(InputAction.CallbackContext obj) {
+    private void TogglePauseInput(InputAction.CallbackContext obj) {
+        if (!GameManager.Instance.IsMainMenu()) {
+            TogglePause();
+        }
+    }
+
+    public void TogglePause() {
 
         Debug.Log("PauseButton");
         isPaused = !isPaused;
@@ -44,12 +51,11 @@ public class VRPauseMenu : MonoBehaviour
 
         if (isPaused) {
             Time.timeScale = 0f;
-        }
-
-        else {
+        } else {
             Time.timeScale = 1f;
         }
+
     }
 
-   
+
 }

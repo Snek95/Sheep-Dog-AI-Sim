@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
   
     private Transform activeDogRef;
     [SerializeField] private Transform startingPosition;
+    [SerializeField] private GameObject mainMenuUI;
+    [SerializeField] private GameObject playerCharacter;
 
     public event EventHandler OnStateChanged;
     private bool PlayingFP = true;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
-        SheepCount = 10;
+        
     }
 
     private void Start() {
@@ -63,10 +65,12 @@ public class GameManager : MonoBehaviour {
             SetState(GameState.PlayingFP);
             SetState(GameState.Starting);
             SetState(GameState.Playing);
+            mainMenuUI.SetActive(false);
         } else {
             SetState(GameState.PlayingTP);
             SetState(GameState.Starting);
             SetState(GameState.Playing);
+            mainMenuUI.SetActive(false);
         }
     }
 
@@ -92,20 +96,12 @@ public class GameManager : MonoBehaviour {
 
     public void ReturnToMenu() {
         SetState(GameState.MainMenu);
+        mainMenuUI.SetActive(true);
+        playerCharacter.transform.position = startingPosition.position;
+        playerCharacter.transform.rotation = startingPosition.rotation;
         
     }
-
-    
-
-    /*private void PrintMeanReward() {
-        dogs = FindObjectsByType<Dog>(FindObjectsSortMode.None);
-        float avgReward = dogs.Average(d => d.CumulativeReward);
-        Debug.Log($"[GameManager] Durchschnittlicher Reward ({dogs.Length} Agents): {avgReward:F2} Episode: {episodeCount:F2}");
-    }*/
-
-   
-
-    
+       
 
     public void ToggleRLSheep(bool rlsheepToggle) {
         useRLSheep = rlsheepToggle;
