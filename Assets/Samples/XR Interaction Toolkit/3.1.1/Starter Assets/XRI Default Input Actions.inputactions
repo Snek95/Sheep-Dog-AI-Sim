@@ -3448,6 +3448,54 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Test",
+            "id": "3797efb7-65de-4c27-9662-5d83730fe7e1",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "00118ce6-3247-4a1b-94a1-f55def80a5ca",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "movetest",
+                    "type": "Value",
+                    "id": "fd4cad1e-bbd7-46b2-b28a-557a03a6cba6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "13d7e353-ad5d-40dc-bba6-9626ddd1d1b4",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25a77938-e1e1-4562-aa79-972340da0e8d",
+                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "movetest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

@@ -29,7 +29,7 @@ public class PlayerDog : MonoBehaviour {
     
 
     private Vector3 ogStablePos = new Vector3(-11.79f, 2.93f, -2.42f);
-    private Vector3 originalDumbDogPosition = new Vector3(-9.59f,2.73f,5.759f);
+    private Vector3 originalDumbDogPosition = new Vector3(-9.59f,2.264f,5.759f);
     private Vector3 mainMenuPosition = new Vector3(-2.5f,0.81f,-10.39f);
 
     private List<Transform> activeSheep = new List<Transform>();

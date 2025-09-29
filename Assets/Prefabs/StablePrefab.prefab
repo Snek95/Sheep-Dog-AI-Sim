@@ -87,6 +87,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f1d2510ce990f4689da42d5cab9834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerEyes: {fileID: 0}
+  dog: {fileID: 0}
+  playerDog: {fileID: 0}
 --- !u!23 &106771198116715994
 MeshRenderer:
   m_ObjectHideFlags: 0
