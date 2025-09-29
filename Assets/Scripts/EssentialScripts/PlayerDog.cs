@@ -98,6 +98,22 @@ public class PlayerDog : MonoBehaviour {
 
     private void GM_OnStateChanged(object sender, System.EventArgs e)
     {
+        if (GameManager.Instance.IsPlayingFP() || GameManager.Instance.IsPlayingTP())
+        {
+            if (!GameManager.Instance.useRLSheep)
+            {
+                sheepController.gameObject.SetActive(true);
+                rlSheepController.gameObject.SetActive(false);
+            }
+            else
+            {
+                rlSheepController.gameObject.SetActive(true);
+                sheepController.gameObject.SetActive(false);
+                rlSheepController.DestroyAllSheep();
+                rlSheepController.SpawnSheep(GameManager.Instance.SheepCount);
+                rlSheepController.ResetScene();
+            }
+        }
         if (GameManager.Instance.IsPlayingFP())
         {
             GameManager.Instance.SetDogRef(gameObject.transform);

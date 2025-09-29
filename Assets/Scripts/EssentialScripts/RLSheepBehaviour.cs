@@ -19,17 +19,33 @@ public class RLSheepBehaviour : Agent
 
     [SerializeField] private LayerMask sheepLayerMask;
 
+    private Transform sheepVisual;
+    private float tiltOffset;
+
     public override void Initialize()
     {
         CurrentEpisode = -1;
         CumulativeReward = 0f;
         agentRb = GetComponent<Rigidbody>();
         agentRb.maxAngularVelocity = 500;
+        sheepVisual = transform.Find("Sheep2");
+        tiltOffset = UnityEngine.Random.Range(0f, 360f);
+    }
+
+    void Update()
+    {
+        // Tilt the sheep based on movement
+        if (sheepVisual != null)
+        {
+            float tiltAngle = Mathf.Sin((Time.time + tiltOffset) * 9) * 60;
+            Quaternion targetTilt = Quaternion.Euler(0, 0, tiltAngle);
+            sheepVisual.localRotation = Quaternion.Slerp(sheepVisual.localRotation, targetTilt, Time.deltaTime);
+        }
     }
 
     public void MoveAgent(ActionBuffers act)
     {
-        
+
 
         var rotate = act.ContinuousActions[1];
         var rawMoveSpeed = act.ContinuousActions[0];

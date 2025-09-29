@@ -11,10 +11,16 @@ public class SheepBehaviour : MonoBehaviour
 
     float randomMovementOffset;
 
+    private Transform sheepVisual;
+
+    private float tiltOffset;
+
     void Start()
     {
         randomMovementOffset = Random.value;
         controller = transform.parent.gameObject.GetComponent<SheepController>();
+        sheepVisual = transform.Find("Sheep2");
+        tiltOffset = Random.Range(0f, 360f);
     }
 
     // Update is called once per frame
@@ -91,8 +97,8 @@ public class SheepBehaviour : MonoBehaviour
         }
 
         // Random movement
-        float xNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 10.0f)-0.46f;
-        float zNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 20.0f)-0.46f;
+        float xNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 10.0f) - 0.46f;
+        float zNoise = Mathf.PerlinNoise(Time.time * controller.randomMovementFrequency, randomMovementOffset * 20.0f) - 0.46f;
         randomMovement = new Vector3(xNoise, 0, zNoise) * controller.randomMovementStrength;
         //Debug.Log($"Random Movement: {xNoise < 0}");
 
@@ -108,7 +114,7 @@ public class SheepBehaviour : MonoBehaviour
 
         // Calculate the new direction
         Vector3 newVelocity = (inertia + separation + alignment + attraction + dog + boundary + randomMovement + barriers) * controller.speedMultiplier;
-        newVelocity = new Vector3 (newVelocity.x,0, newVelocity.z);
+        newVelocity = new Vector3(newVelocity.x, 0, newVelocity.z);
         newVelocity = ClampMagnitude(newVelocity, controller.maxSpeed, controller.minSpeed);
         currentVelocity = newVelocity;
 
@@ -118,13 +124,21 @@ public class SheepBehaviour : MonoBehaviour
 
         // Move the sheepController
         transform.position += transform.forward * newVelocity.magnitude * Time.deltaTime;
+        
+        // Tilt the sheep based on movement
+        if (sheepVisual != null)
+        {
+            float tiltAngle = Mathf.Sin((Time.time + tiltOffset) * 9) * 60;
+            Quaternion targetTilt = Quaternion.Euler(0, 0, tiltAngle);
+            sheepVisual.localRotation = Quaternion.Slerp(sheepVisual.localRotation, targetTilt, Time.deltaTime);
+        }
     }
 
-    private void OnDrawGizmos()
+    /* private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.3f);
         Gizmos.DrawWireSphere(transform.position, controller.neighborDist);
-    }
+    } */
     
     public static Vector3 ClampMagnitude(Vector3 v, float max, float min)
     {

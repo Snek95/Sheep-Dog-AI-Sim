@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ToggleRLSheep(bool rlsheepToggle) {
-        useRLSheep = rlsheepToggle;
+        useRLSheep = !useRLSheep;
         Debug.Log("Rl Sheep on:  " + useRLSheep);
     }
 

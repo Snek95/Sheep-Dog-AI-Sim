@@ -35,14 +35,12 @@ public class RLSheepController : MonoBehaviour
 
     void Start()
     {
+        m_SheepGroup = new SimpleMultiAgentGroup();
         if (GameManager.Instance.useRLSheep == false)
         {
             gameObject.SetActive(false);
             return;
         }
-        m_SheepGroup = new SimpleMultiAgentGroup();
-        SpawnSheep(sheepAmount);
-        ResetScene();
     }
 
     private void FixedUpdate()
@@ -50,7 +48,7 @@ public class RLSheepController : MonoBehaviour
         m_ResetTimer += 1;
         if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0)
         {
-            ResetScene();
+            //ResetScene();
         }
         /*
         // Calculate average position of all active sheep
@@ -94,10 +92,12 @@ public class RLSheepController : MonoBehaviour
         //Debug.Log("Sheep reached goal: " + sheep.name);
         m_SheepGroup.UnregisterAgent(sheep);
         sheep.gameObject.SetActive(false);
+        Destroy(sheep.gameObject);
     }
 
-    private void SpawnSheep(int amount)
+    public void SpawnSheep(int amount)
     {
+        Debug.Log("Spawning " + amount + " RL Sheep for " + transform.parent.name);
         for (int i = 0; i < amount; i++)
         {
             var sheep = Instantiate(RLSheepPrefab, transform);
@@ -108,6 +108,22 @@ public class RLSheepController : MonoBehaviour
             {
                 sheepUI.sheepList.Add(sheepBehaviour);
             }
+        }
+    }
+
+    public void DestroyAllSheep()
+    {
+        foreach (var sheep in sheepList)
+        {
+            if (sheep != null)
+            {
+                Destroy(sheep.gameObject);
+            }
+        }
+        sheepList.Clear();
+        if (sheepUI != null)
+        {
+            sheepUI.sheepList.Clear();
         }
     }
 

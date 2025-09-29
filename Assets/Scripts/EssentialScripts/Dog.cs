@@ -15,7 +15,6 @@ public class Dog : Agent {
     private Vector3 last_known_goal_pos = Vector3.zero;
     private Dictionary<int, Vector3> last_known_sheep_positions = new Dictionary<int, Vector3>();
 
-    private bool useRLSheep = false;
     [SerializeField] private SheepController sheepController;
     [SerializeField] private RLSheepController rlSheepController;
     [SerializeField] private Transform spawnReference;
@@ -74,6 +73,15 @@ public override void Initialize()
             }
             else
             {
+                if (GameManager.Instance.useRLSheep)
+                {
+                    sheepController.gameObject.SetActive(false);
+                    rlSheepController.gameObject.SetActive(true);
+                } else
+                {
+                    rlSheepController.gameObject.SetActive(false);
+                    sheepController.gameObject.SetActive(true);
+                }
                 OnEpisodeBegin();
             }
         }
@@ -88,7 +96,6 @@ public override void Initialize()
 
         obstacleAmount = GameManager.Instance.obstacleCount;
         maxSheep = GameManager.Instance.SheepCount;
-        useRLSheep = GameManager.Instance.useRLSheep;
         // Lösche die gespeicherten Positionen zu Beginn jeder Episode
         last_known_sheep_positions.Clear();
         last_known_goal_pos = Vector3.zero;
@@ -284,9 +291,11 @@ public override void Initialize()
             SpawnObstacles();
         }
 
-        if (useRLSheep)
+        if (GameManager.Instance.useRLSheep)
         {
             if (rlSheepController == null) return;
+            rlSheepController.DestroyAllSheep();
+            rlSheepController.SpawnSheep(GameManager.Instance.SheepCount);
             rlSheepController.ResetScene();
             foreach (RLSheepBehaviour sheepBehaviour in rlSheepController.sheepList)
             {
@@ -317,7 +326,7 @@ public override void Initialize()
         foreach (Transform child in spawnReference.transform) {
             if (child.CompareTag("Obstacle")) Destroy(child.gameObject);
         }
-
+        Debug.Log($"Spawning {obstacleAmount} obstacles. Dog");
         for (int i = 0; i < obstacleAmount; i++) {
             if (obstacles.Count == 0) return;
 
