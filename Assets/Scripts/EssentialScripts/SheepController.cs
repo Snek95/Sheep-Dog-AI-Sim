@@ -104,14 +104,23 @@ public class SheepController : MonoBehaviour
         }
             
     }
-    
-    private void UpdateDogRef() {
+
+    private void UpdateDogRef()
+    {
+
         dog = GameManager.Instance.GetDogRef();
     }
 
     public void Spawn()
     {
-        UpdateDogRef();
+        Dog dogCom;
+        if (dog.TryGetComponent<Dog>(out dogCom))
+        {
+            if (!dogCom.isOpponentDog) UpdateDogRef();
+        } else
+        {
+            UpdateDogRef();
+        }
         spawnCount = GameManager.Instance.SheepCount;
 
         for (var i = 0; i < spawnCount; i++)

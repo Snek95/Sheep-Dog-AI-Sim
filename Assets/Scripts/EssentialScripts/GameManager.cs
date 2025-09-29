@@ -54,11 +54,14 @@ public class GameManager : MonoBehaviour {
     // ----------------------
     // State Handling
     // ----------------------
-    public void SetState(GameState newState) {
-        if (currentState != newState) {
+    public void SetState(GameState newState)
+    {
+        if (currentState != newState)
+        {
             currentState = newState;
             OnStateChanged?.Invoke(this, EventArgs.Empty);
         }
+        Debug.Log("Set State: " + currentState);
     }
 
     public bool IsMainMenu() => currentState == GameState.MainMenu;
@@ -127,7 +130,8 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Sheeps:  " + sheeps);
     }
 
-    public void SetDogRef(Transform dogRef) {
+    public void SetDogRef(Transform dogRef)
+    {
         activeDogRef = dogRef;
     }
 

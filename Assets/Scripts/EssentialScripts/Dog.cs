@@ -45,23 +45,25 @@ public class Dog : Agent {
 
     public List<Transform> activeSheep = new List<Transform>();
     private Dictionary<Transform, float> sheepPrevDist = new Dictionary<Transform, float>();
-
+    private Animator animator;
+    
 public override void Initialize()
-{
-    rb = GetComponent<Rigidbody>();
-    Time.timeScale = timeScale;
-    raySensorComponent = GetComponent<RayPerceptionSensorComponent3D>();
+    {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        Time.timeScale = timeScale;
+        raySensorComponent = GetComponent<RayPerceptionSensorComponent3D>();
 
-    if (GameManager.Instance != null)
-    {
-        GameManager.Instance.OnStateChanged += GM_OnStateChanged;
-        GameManager.Instance.SetDogRef(gameObject.transform);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnStateChanged += GM_OnStateChanged;
+            if (!isOpponentDog) GameManager.Instance.SetDogRef(gameObject.transform);
+        }
+        else
+        {
+            Debug.LogError("GameManager.Instance is null. Ensure GameManager is in the scene and initialized.");
+        }
     }
-    else
-    {
-        Debug.LogError("GameManager.Instance is null. Ensure GameManager is in the scene and initialized.");
-    }
-}
    
 
     private void GM_OnStateChanged(object sender, System.EventArgs e) {
@@ -329,11 +331,13 @@ public override void Initialize()
         }
     }
 
-    private void MoveAgent(ActionSegment<int> act) {
+    private void MoveAgent(ActionSegment<int> act)
+    {
         var action = act[0];
         float maxSpeed = 2.5f;
 
-        switch (action) {
+        switch (action)
+        {
             case 0:
                 AddReward(-0.01f);
                 break;
@@ -351,6 +355,8 @@ public override void Initialize()
                 AddReward(-0.01f);
                 break;
         }
+        float speed = rb.linearVelocity.magnitude;
+        animator.SetFloat("speed", speed);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut) {
@@ -385,7 +391,7 @@ public override void Initialize()
             Debug.Log($"Sheep in Goal: {sheepsInGoal}/{maxSheep}. OpponentDog");
             if (sheepsInGoal >= GameManager.Instance.SheepCount)
             {
-                GameManager.Instance.OnGameOver();
+                //GameManager.Instance.OnGameOver();
             }
         }
     }

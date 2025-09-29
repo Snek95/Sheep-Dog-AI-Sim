@@ -8,8 +8,14 @@ public class DumbDog : MonoBehaviour
     [SerializeField] private float rotationCoeff = 3f;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float activationRange = 1f;
+
+    private Animator animator;
+    private Rigidbody rb;
  
- 
+    private void Start() {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,8 +28,11 @@ public class DumbDog : MonoBehaviour
         if (Vector3.Distance(transform.position, bone.position) > activationRange)
         {
             transform.position += transform.forward * speed * Time.deltaTime;
+            animator.SetFloat("speed", 1f);
         }
-        // Move the sheepController
-        
+        else
+        {
+            animator.SetFloat("speed", 0f);
+        }
     }
 }
