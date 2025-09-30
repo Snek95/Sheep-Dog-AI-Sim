@@ -247,14 +247,9 @@ public class PlayerDog : MonoBehaviour {
         sheepsInGoal++;
         Debug.Log($"Sheep in Goal: {sheepsInGoal}/{maxSheep}. PlayerDog");   
 
-        activeSheep = activeSheep.Where(s => s != null && s.gameObject.activeSelf).ToList();
-
-        if (NoMoreSheepsLeft()) StartFP();
+        /* if (sheepsInGoal >= maxSheep) {
+            Debug.Log("All sheeps in goal - You win!");
+            GameManager.Instance.OnGameOver();
+        } */
     }
-
-    private bool NoMoreSheepsLeft() {
-        return activeSheep.Count == 0;
-    }
-
-    
 }

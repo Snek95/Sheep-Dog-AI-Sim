@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.Barracuda;
 using UnityEngine;
 
 public class ProgressDisplay : MonoBehaviour
@@ -7,6 +8,10 @@ public class ProgressDisplay : MonoBehaviour
     [SerializeField] private Transform playerEyes;
     public Dog dog;
     public PlayerDog playerDog;
+
+    public ParticleSystem winEffect1;
+    public ParticleSystem winEffect2;
+    public AudioSource soundEffect;
 
 
     private TextMeshPro textMesh;
@@ -37,15 +42,32 @@ public class ProgressDisplay : MonoBehaviour
         if (dog != null && dog.isOpponentDog)
         {
             textMesh.text = $"{dog.sheepsInGoal}/{GameManager.Instance.SheepCount}";
+            if (dog.sheepsInGoal >= GameManager.Instance.SheepCount)
+            {
+                winEffect1.Play();
+                winEffect2.Play();
+                soundEffect.Play();
+                dog.sheepsInGoal = 0;
+                Debug.Log("Firework! opponent wins");
+                gameObject.SetActive(false);
+            }
         }
         else if (playerDog != null && !dog.gameObject.activeSelf)
         {
             textMesh.text = $"{playerDog.sheepsInGoal}/{GameManager.Instance.SheepCount}";
+            if (playerDog.sheepsInGoal >= GameManager.Instance.SheepCount)
+            {
+                winEffect1.Play();
+                winEffect2.Play();
+                soundEffect.Play();
+                playerDog.sheepsInGoal = 0;
+                Debug.Log("Firework! Player wins");
+                gameObject.SetActive(false);
+            }
         }
         else
         {
             Debug.Log("ProgressDisplay: No dog or playerDog assigned.");
         }
-
     }
 }
